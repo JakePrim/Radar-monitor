@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="picker.prim.com.primpicker_core">
+
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.PrimPickerActivity"/>
+    </application>
+</manifest>

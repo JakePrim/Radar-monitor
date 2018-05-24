@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">primpicker-core</string>
+    <string name="str_media_type_video">视频</string>
+    <string name="str_empty_text">No Media Yet</string>
+    <string name="str_compress">压缩视频</string>
+    <string name="str_next_text">下一步</string>
+</resources>
