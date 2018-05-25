@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -29,6 +30,7 @@ import picker.prim.com.primpicker_core.entity.Directory;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
+import picker.prim.com.primpicker_core.ui.adapter.DirectoryAdapter;
 import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
 
 /**
@@ -43,7 +45,8 @@ import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
 public class PrimPickerActivity extends AppCompatActivity implements FileLoaderCallback.LoaderCallback,
         View.OnClickListener,
         PrimSelectFragment.OnSelectFragmentListener,
-        SelectAdapter.OnSelectItemListener {
+        SelectAdapter.OnSelectItemListener,
+        DirectorySpinner.OnDirsItemSelectedListener {
 
     private ImageView iv_picker_back;
 
@@ -63,6 +66,10 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private RelativeLayout layout_bottom;
 
+    private DirectorySpinner directorySpinner;
+
+    private DirectoryAdapter directoryAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +85,14 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         FileLoaderHelper.getInstance().onCreate(this, this);
         FileLoaderHelper.getInstance().onRestoreInstanceState(savedInstanceState);
         FileLoaderHelper.getInstance().getLoadDirs();
+        directoryAdapter = new DirectoryAdapter(this, null, false);
+        directorySpinner = new DirectorySpinner(this);
+        directorySpinner.setOnDirsItemSelectedListener(this);
+        directorySpinner.setSelectTextView(tv_picker_type);
+        directorySpinner.setPopupAnchorView(findViewById(R.id.layout_top));
+        directorySpinner.setAdapter(directoryAdapter);
         iv_picker_back.setOnClickListener(this);
         btn_next.setOnClickListener(this);
-        tv_picker_type.setOnClickListener(this);
         btn_next.setEnabled(false);
         cb_compress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -111,6 +123,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     @Override
     public void loadFinish(final Cursor data) {
+        directoryAdapter.swapCursor(data);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -144,7 +157,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     @Override
     public void loadReset() {
-
+        directoryAdapter.swapCursor(null);
     }
 
     @Override
@@ -171,8 +184,6 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             result.putExtra(EXTRA_RESULT_COMPRESS, isComprss);
             setResult(RESULT_OK, result);
             finish();
-        } else if ((i == R.id.tv_picker_type)) {
-
         }
     }
 
@@ -203,5 +214,15 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             btn_next.setBackgroundColor(getResources().getColor(R.color.color_FA364A));
             btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
         }
+    }
+
+    @Override
+    public void onDirItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        directoryAdapter.getCursor().moveToPosition(position);
+        Directory directory = Directory.valueOf(directoryAdapter.getCursor());
+        if (directory.isAll() && SelectSpec.getInstance().capture) {
+            directory.addCaptureCount();
+        }
+        setData(directory);
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="72dp">
+
+    <ImageView
+        android:id="@+id/iv_dirs_item"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_dirs_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_dirs_item"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/iv_dirs_item"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_000000"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_dirs_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_dirs_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/iv_dirs_item"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp"/>
+
+</RelativeLayout>
