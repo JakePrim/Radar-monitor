@@ -33,9 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:drawablePadding="4dp"
         android:background="@color/color_tran"
         android:button="@drawable/check_box_item_bg"/>
 </merge>

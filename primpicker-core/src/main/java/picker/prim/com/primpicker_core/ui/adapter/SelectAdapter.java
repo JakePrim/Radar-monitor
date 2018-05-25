@@ -77,16 +77,19 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
 
     private static final String TAG = "SelectAdapter";
 
-    /** 检查选择的状态 */
+    /** 检查选择的状态 防止勾选错乱*/
     private void checkSelectState(MediaItem item, MediaGridView mediaGridView) {
-        int checkNumOf = selectItemCollection.checkNumOf(item);
-        if (checkNumOf != Integer.MAX_VALUE) {
+        boolean checkNumOf = selectItemCollection.isSelected(item);
+        if (checkNumOf) {
             mediaGridView.setCheckBox(true);
+            mediaGridView.setChecked(true);
         } else {
             if (selectItemCollection.maxSelectedRached()) {
                 mediaGridView.setCheckBox(false);
+                mediaGridView.setChecked(false);
             } else {
                 mediaGridView.setCheckBox(true);
+                mediaGridView.setChecked(false);
             }
         }
     }

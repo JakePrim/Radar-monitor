@@ -3,6 +3,7 @@ package picker.prim.com.primpicker_core.ui;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
@@ -56,12 +61,15 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private Directory directory;
 
+    private RelativeLayout layout_bottom;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
         selectItemCollection = new SelectItemCollection(this);
         iv_picker_back = (ImageView) findViewById(R.id.iv_picker_back);
+        layout_bottom = (RelativeLayout) findViewById(R.id.layout_bottom);
         tv_picker_type = (TextView) findViewById(R.id.tv_picker_type);
         btn_next = (TextView) findViewById(R.id.btn_next);
         cb_compress = (CheckBox) findViewById(R.id.cb_compress);
@@ -74,6 +82,19 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         btn_next.setOnClickListener(this);
         tv_picker_type.setOnClickListener(this);
         btn_next.setEnabled(false);
+        cb_compress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isComprss = isChecked;
+            }
+        });
+        isComprss = SelectSpec.getInstance().compress;
+        cb_compress.setChecked(isComprss);
+        if (SelectSpec.getInstance().onlyShowVideos()) {
+            layout_bottom.setVisibility(View.VISIBLE);
+        } else {
+            layout_bottom.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -131,13 +152,25 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
+    public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
+    public static final String EXTRA_RESULT_COMPRESS = "extra_result_compress";
+    public boolean isComprss;
+
     @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.iv_picker_back) {
             finish();
         } else if (i == R.id.btn_next) {
-
+            Intent result = new Intent();
+            ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
+            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+            ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
+            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+            result.putExtra(EXTRA_RESULT_COMPRESS, isComprss);
+            setResult(RESULT_OK, result);
+            finish();
         } else if ((i == R.id.tv_picker_type)) {
 
         }

@@ -75,16 +75,17 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
         iv_media_thumbnail.setOnClickListener(this);
         media_select_view.setOnClickListener(this);
 
-        media_select_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        media_select_cb.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+            public void onClick(View v) {
+                boolean checked = media_select_cb.isChecked();
+                if (checked) {
                     media_select_view.setVisibility(VISIBLE);
                 } else {
                     media_select_view.setVisibility(GONE);
                 }
                 if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
-                    mOnMediaGridItemClick.get().clickSelectItem(isChecked, media_select_cb, mediaItem, perImgInfo.viewHolder);
+                    mOnMediaGridItemClick.get().clickSelectItem(checked, media_select_cb, mediaItem, perImgInfo.viewHolder);
                 }
             }
         });
@@ -93,12 +94,10 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
 
     public void setCheckBox(boolean flag) {
         media_select_cb.setEnabled(flag);
-        if (!flag) {
-            media_select_cb.setChecked(false);
-            media_select_cb.setButtonDrawable(R.drawable.check_box_bg);
-        } else {
-            media_select_cb.setButtonDrawable(R.drawable.check_box_item_bg);
-        }
+    }
+
+    public void setChecked(boolean checked) {
+        media_select_cb.setChecked(checked);
     }
 
     public void bindMediaItem(MediaItem item) {

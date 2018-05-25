@@ -1,12 +1,19 @@
 package picker.prim.com.primpicker_core;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Set;
 
 import picker.prim.com.primpicker_core.entity.MimeType;
+
+import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_COMPRESS;
+import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_SELECTION;
+import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_SELECTION_PATH;
 
 /**
  * ================================================
@@ -44,6 +51,21 @@ public final class PrimPicker {
 
     public SelectBuilder choose(Set<MimeType> types) {
         return new SelectBuilder(this, types);
+    }
+
+    /** 获取返回值 uri */
+    public static List<Uri> obtainUriResult(Intent data) {
+        return data.getParcelableArrayListExtra(EXTRA_RESULT_SELECTION);
+    }
+
+    /** 获取返回值 string path */
+    public static List<String> obtainPathResult(Intent data) {
+        return data.getStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH);
+    }
+
+    /** 获取返回值 boolean 是否压缩 */
+    public static boolean obtainCompressResult(Intent data) {
+        return data.getBooleanExtra(EXTRA_RESULT_COMPRESS, false);
     }
 
     Activity getActivity() {
