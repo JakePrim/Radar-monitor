@@ -95,7 +95,7 @@ public class Directory implements Parcelable {
 
     public String getDisplayName(Context context) {
         if (isAll()) {
-            return "All Media";
+            return "全部";
         }
         return mDisplayName;
     }

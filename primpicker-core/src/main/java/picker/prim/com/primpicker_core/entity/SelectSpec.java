@@ -36,6 +36,7 @@ public class SelectSpec {
     /** 是否进行压缩 */
     public boolean compress;
 
+    /** 仅显示一种类型 */
     public boolean showSingleMediaType;
 
     /** 缩略图的比例 */

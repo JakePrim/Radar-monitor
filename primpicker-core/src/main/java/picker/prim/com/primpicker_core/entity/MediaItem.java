@@ -73,10 +73,11 @@ public class MediaItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        //write 每一个数据类型时要和read 的顺序一致 否则会报异常：Parcel android.os.Parcel@3e2914: Unmarshalling unknown type code 3080303 at offset 184
         dest.writeLong(id);
+        dest.writeString(mimeType);
         dest.writeLong(size);
         dest.writeLong(duration);
-        dest.writeString(mimeType);
         dest.writeParcelable(uri, 0);
     }
 

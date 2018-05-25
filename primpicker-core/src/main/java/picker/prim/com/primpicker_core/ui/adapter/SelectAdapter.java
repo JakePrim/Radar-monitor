@@ -2,16 +2,22 @@ package picker.prim.com.primpicker_core.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
 
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
+import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.MediaGridView;
 
@@ -24,20 +30,21 @@ import picker.prim.com.primpicker_core.ui.MediaGridView;
  * 修订历史：
  * ================================================
  */
-public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
+public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implements MediaGridView.OnMediaGridItemClick {
 
     private static final int VIEW_TYPE_CAPTURE = 0x01;
     private static final int VIEW_TYPE_MEDIA = 0x02;
     private WeakReference<Context> mContext;
     private RecyclerView recyclerView;
     private SelectSpec selectSpec;
+    private SelectItemCollection selectItemCollection;
 
-
-    public SelectAdapter(Context context, RecyclerView recyclerView) {
+    public SelectAdapter(Context context, RecyclerView recyclerView, SelectItemCollection selectItemCollection) {
         super(null);
         mContext = new WeakReference<>(context);
         selectSpec = SelectSpec.getInstance();
         this.recyclerView = recyclerView;
+        this.selectItemCollection = selectItemCollection;
     }
 
     @Override
@@ -61,8 +68,26 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         if (holder instanceof MediaViewHolder) {
             MediaViewHolder mediaViewHolder = (MediaViewHolder) holder;
             MediaItem item = MediaItem.valueOf(cursor);
+            mediaViewHolder.mediaGridView.setOnMediaGridItemClick(this);
             mediaViewHolder.mediaGridView.bindPerImgInfo(new MediaGridView.PerImgInfo(getImageResize(mContext.get()), null, holder));
             mediaViewHolder.mediaGridView.bindMediaItem(item);
+            checkSelectState(item, mediaViewHolder.mediaGridView);
+        }
+    }
+
+    private static final String TAG = "SelectAdapter";
+
+    /** 检查选择的状态 */
+    private void checkSelectState(MediaItem item, MediaGridView mediaGridView) {
+        int checkNumOf = selectItemCollection.checkNumOf(item);
+        if (checkNumOf != Integer.MAX_VALUE) {
+            mediaGridView.setCheckBox(true);
+        } else {
+            if (selectItemCollection.maxSelectedRached()) {
+                mediaGridView.setCheckBox(false);
+            } else {
+                mediaGridView.setCheckBox(true);
+            }
         }
     }
 
@@ -81,6 +106,39 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         return mImageResize;
     }
 
+
+    @Override
+    public void clickItem(ImageView imageView, MediaItem item, RecyclerView.ViewHolder viewHolder) {
+        if (mOnSelectItemListener != null && mOnSelectItemListener.get() != null) {
+            mOnSelectItemListener.get().itemClick(imageView, item, viewHolder.getAdapterPosition());
+        }
+    }
+
+    @Override
+    public void clickSelectItem(boolean isCheck, CheckBox checkBox, MediaItem item, RecyclerView.ViewHolder viewHolder) {
+        int checkNumOf = selectItemCollection.checkNumOf(item);
+        if (checkNumOf == Integer.MAX_VALUE) {
+            selectItemCollection.add(item);
+            notifyCheckStateChanged();
+        } else {
+            selectItemCollection.remove(item);
+            notifyCheckStateChanged();
+        }
+    }
+
+    private void notifyCheckStateChanged() {
+        Handler handler = new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                notifyDataSetChanged();
+                if (mOnSelectItemListener != null && mOnSelectItemListener.get() != null) {
+                    mOnSelectItemListener.get().onUpdate();
+                }
+            }
+        };
+        handler.post(r);
+    }
+
     private static class MediaViewHolder extends RecyclerView.ViewHolder {
 
         private MediaGridView mediaGridView;
@@ -89,6 +147,22 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
             super(itemView);
             mediaGridView = (MediaGridView) itemView;
         }
+    }
+
+    public interface OnSelectItemListener {
+        void itemClick(View view, MediaItem item, int position);
+
+        void onUpdate();
+    }
+
+    private WeakReference<OnSelectItemListener> mOnSelectItemListener;
+
+    public void registerSelectItemListener(OnSelectItemListener onSelectItemListener) {
+        mOnSelectItemListener = new WeakReference<>(onSelectItemListener);
+    }
+
+    public void unRegisterSelectItemListener() {
+        mOnSelectItemListener = null;
     }
 
 }

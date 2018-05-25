@@ -4,5 +4,6 @@
     <application
         android:theme="@style/AppTheme">
         <activity android:name=".ui.PrimPickerActivity"/>
+        <activity android:name=".ui.PerviewActivity"/>
     </application>
 </manifest>

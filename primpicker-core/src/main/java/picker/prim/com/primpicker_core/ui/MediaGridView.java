@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 
+import java.lang.ref.WeakReference;
+
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 
@@ -81,9 +83,22 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
                 } else {
                     media_select_view.setVisibility(GONE);
                 }
+                if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
+                    mOnMediaGridItemClick.get().clickSelectItem(isChecked, media_select_cb, mediaItem, perImgInfo.viewHolder);
+                }
             }
         });
 
+    }
+
+    public void setCheckBox(boolean flag) {
+        media_select_cb.setEnabled(flag);
+        if (!flag) {
+            media_select_cb.setChecked(false);
+            media_select_cb.setButtonDrawable(R.drawable.check_box_bg);
+        } else {
+            media_select_cb.setButtonDrawable(R.drawable.check_box_item_bg);
+        }
     }
 
     public void bindMediaItem(MediaItem item) {
@@ -147,7 +162,25 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.iv_media_thumbnail) {
-
+            if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
+                mOnMediaGridItemClick.get().clickItem(iv_media_thumbnail, mediaItem, perImgInfo.viewHolder);
+            }
+        } else if (i == R.id.media_select_view) {
+            if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
+                mOnMediaGridItemClick.get().clickItem(iv_media_thumbnail, mediaItem, perImgInfo.viewHolder);
+            }
         }
+    }
+
+    public interface OnMediaGridItemClick {
+        void clickItem(ImageView imageView, MediaItem item, RecyclerView.ViewHolder viewHolder);
+
+        void clickSelectItem(boolean isCheck, CheckBox checkBox, MediaItem item, RecyclerView.ViewHolder viewHolder);
+    }
+
+    private WeakReference<OnMediaGridItemClick> mOnMediaGridItemClick;
+
+    public void setOnMediaGridItemClick(OnMediaGridItemClick onMediaGridItemClick) {
+        mOnMediaGridItemClick = new WeakReference<>(onMediaGridItemClick);
     }
 }

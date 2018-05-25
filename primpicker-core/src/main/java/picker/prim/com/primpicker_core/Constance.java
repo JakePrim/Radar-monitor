@@ -16,6 +16,7 @@ public class Constance {
     public final static String EXTRA_FILE_TYPE = "EXTRA_FILE_TYPE";
 
     public final static String EXTRA_DATA = "EXTRA_DATA";
+    public final static String EXTRA_DATA_ITEM = "EXTRA_DATA_ITEM";
 
     public final static int MEDIA_TYPE_IMAGE = 1;
     public final static int MEDIA_TYPE_VIDEO = 3;

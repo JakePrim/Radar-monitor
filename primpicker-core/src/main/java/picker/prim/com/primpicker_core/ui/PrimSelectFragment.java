@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileMediaCallback;
 import picker.prim.com.primpicker_core.entity.Directory;
+import picker.prim.com.primpicker_core.entity.MediaItem;
+import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
 
@@ -27,13 +30,22 @@ import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
  * 修订历史：
  * ================================================
  */
-public class PrimSelectFragment extends Fragment implements FileMediaCallback.MediaCallback {
+public class PrimSelectFragment extends Fragment implements FileMediaCallback.MediaCallback,
+        SelectAdapter.OnSelectItemListener {
+
+    private static final String TAG = "PrimSelectFragment";
 
     private RecyclerView recyclerView;
 
     private FileMediaCallback fileMediaCallback = new FileMediaCallback();
 
     private SelectAdapter adapter;
+
+    private SelectItemCollection selectItemCollection;
+
+    private OnSelectFragmentListener onSelectFragmentListener;
+
+    private SelectAdapter.OnSelectItemListener onSelectItemListener;
 
     public static PrimSelectFragment newInstance(Directory directory) {
         PrimSelectFragment fragment = new PrimSelectFragment();
@@ -46,6 +58,13 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof OnSelectFragmentListener) {
+            onSelectFragmentListener = (OnSelectFragmentListener) context;
+        }
+
+        if (context instanceof SelectAdapter.OnSelectItemListener) {
+            onSelectItemListener = (SelectAdapter.OnSelectItemListener) context;
+        }
     }
 
     @Nullable
@@ -63,8 +82,10 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        selectItemCollection = onSelectFragmentListener.getSelectItemCollction();
         Directory directory = getArguments().getParcelable(Constance.EXTRA_DATA);
-        adapter = new SelectAdapter(getActivity(), recyclerView);
+        adapter = new SelectAdapter(getActivity(), recyclerView, selectItemCollection);
+        adapter.registerSelectItemListener(this);
         int spanCount = SelectSpec.getInstance().spanCount;
         /**
          * setHasFixedSize 的作用就是确保尺寸是通过用户输入从而确保RecyclerView的尺寸是一个常数。
@@ -86,6 +107,7 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     public void onDestroyView() {
         super.onDestroyView();
         fileMediaCallback.onDestory();
+        adapter.unRegisterSelectItemListener();
     }
 
     @Override
@@ -96,5 +118,25 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     @Override
     public void onMediaReset() {
         adapter.setCursor(null);
+    }
+
+    @Override
+    public void itemClick(View view, MediaItem item, int position) {
+        Log.e(TAG, "itemClick: " + position + item.uri);
+        if (onSelectItemListener != null) {
+            onSelectItemListener.itemClick(view, item, position);
+        }
+    }
+
+    @Override
+    public void onUpdate() {
+        Log.e(TAG, "onUpdate: ");
+        if (onSelectItemListener != null) {
+            onSelectItemListener.onUpdate();
+        }
+    }
+
+    public interface OnSelectFragmentListener {
+        SelectItemCollection getSelectItemCollction();
     }
 }

@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         PrimPicker
                 .with(this)
                 .choose(MimeType.ofVideo())
-                .setSpanCount(4)
-                .setMaxSelected(1)
+                .setSpanCount(3)
+                .setMaxSelected(4)
                 .showSingleMediaType(true)
                 .forResult(1001)
     }

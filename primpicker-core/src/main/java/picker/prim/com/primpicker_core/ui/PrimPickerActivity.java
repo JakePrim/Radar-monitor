@@ -1,5 +1,6 @@
 package picker.prim.com.primpicker_core.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,11 +16,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileLoaderCallback;
 import picker.prim.com.primpicker_core.cursors.FileLoaderHelper;
 import picker.prim.com.primpicker_core.entity.Directory;
+import picker.prim.com.primpicker_core.entity.MediaItem;
+import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
+import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
 
 /**
  * ================================================
@@ -30,7 +35,10 @@ import picker.prim.com.primpicker_core.entity.SelectSpec;
  * 修订历史：
  * ================================================
  */
-public class PrimPickerActivity extends AppCompatActivity implements FileLoaderCallback.LoaderCallback, View.OnClickListener {
+public class PrimPickerActivity extends AppCompatActivity implements FileLoaderCallback.LoaderCallback,
+        View.OnClickListener,
+        PrimSelectFragment.OnSelectFragmentListener,
+        SelectAdapter.OnSelectItemListener {
 
     private ImageView iv_picker_back;
 
@@ -44,10 +52,15 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private FrameLayout container, layout_empty;
 
+    private SelectItemCollection selectItemCollection;
+
+    private Directory directory;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
+        selectItemCollection = new SelectItemCollection(this);
         iv_picker_back = (ImageView) findViewById(R.id.iv_picker_back);
         tv_picker_type = (TextView) findViewById(R.id.tv_picker_type);
         btn_next = (TextView) findViewById(R.id.btn_next);
@@ -57,6 +70,10 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         FileLoaderHelper.getInstance().onCreate(this, this);
         FileLoaderHelper.getInstance().onRestoreInstanceState(savedInstanceState);
         FileLoaderHelper.getInstance().getLoadDirs();
+        iv_picker_back.setOnClickListener(this);
+        btn_next.setOnClickListener(this);
+        tv_picker_type.setOnClickListener(this);
+        btn_next.setEnabled(false);
     }
 
     @Override
@@ -78,12 +95,10 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             @Override
             public void run() {
                 data.moveToPosition(0);
-                Directory directory = Directory.valueOf(data);
+                directory = Directory.valueOf(data);
                 if (directory.isAll() && SelectSpec.getInstance().capture) {
                     directory.addCaptureCount();
                 }
-                Log.e(TAG, "run: " + directory.toString());
-
                 setData(directory);
 
             }
@@ -91,6 +106,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
     }
 
     private void setData(Directory directory) {
+        tv_picker_type.setText(directory.getDisplayName(this));
         if (directory.isAll() && directory.isEmpty()) {
             container.setVisibility(View.GONE);
             layout_empty.setVisibility(View.VISIBLE);
@@ -122,6 +138,37 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             finish();
         } else if (i == R.id.btn_next) {
 
+        } else if ((i == R.id.tv_picker_type)) {
+
+        }
+    }
+
+    @Override
+    public SelectItemCollection getSelectItemCollction() {
+        return selectItemCollection;
+    }
+
+    public static final int REQUEST_CODE_PREVIEW = 601;
+
+    @Override
+    public void itemClick(View view, MediaItem item, int position) {
+        PerviewActivity.newInstance(this, directory, item);
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onUpdate() {
+        Log.e(TAG, "onUpdate: ");
+        if (selectItemCollection.isEmpty()) {
+            btn_next.setTextColor(getResources().getColor(R.color.color_666666));
+            btn_next.setBackgroundColor(getResources().getColor(R.color.color_cccccc));
+            btn_next.setEnabled(false);
+            btn_next.setText(getResources().getString(R.string.str_next_text));
+        } else {
+            btn_next.setEnabled(true);
+            btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
+            btn_next.setBackgroundColor(getResources().getColor(R.color.color_FA364A));
+            btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
         }
     }
 }
