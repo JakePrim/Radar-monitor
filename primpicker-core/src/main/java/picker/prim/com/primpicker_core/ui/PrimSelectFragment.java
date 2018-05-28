@@ -83,7 +83,7 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        selectItemCollection = onSelectFragmentListener.getSelectItemCollction();
+        selectItemCollection = onSelectFragmentListener.getSelectItemCollection();
         Directory directory = getArguments().getParcelable(Constance.EXTRA_DATA);
         adapter = new SelectAdapter(getActivity(), recyclerView, selectItemCollection);
         adapter.registerSelectItemListener(this);
@@ -138,6 +138,6 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     }
 
     public interface OnSelectFragmentListener {
-        SelectItemCollection getSelectItemCollction();
+        SelectItemCollection getSelectItemCollection();
     }
 }

@@ -33,18 +33,18 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
             val str = StringBuffer()
-            str.append("返回结果:").append("Uri:")
+            str.append("返回结果:").append("Uri:").append("\n")
             for (uri in PrimPicker.obtainUriResult(data)) {
                 str.append(uri).append("\n")
             }
-            str.append(" path:")
+            str.append("Path:").append("\n")
             for (s in PrimPicker.obtainPathResult(data)) {
                 str.append(s).append("\n")
             }
             if (PrimPicker.obtainCompressResult(data)) {
                 str.append("压缩视频")
             } else {
-                str.append("不要压缩视频")
+                str.append("不压缩视频")
             }
             result.text = str.toString()
         }

@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -24,10 +23,12 @@ import java.util.ArrayList;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileLoaderCallback;
 import picker.prim.com.primpicker_core.cursors.FileLoaderHelper;
+import picker.prim.com.primpicker_core.entity.CaptureCollection;
 import picker.prim.com.primpicker_core.entity.Directory;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
+import picker.prim.com.primpicker_core.listener.OpenCaptureListener;
 import picker.prim.com.primpicker_core.ui.adapter.DirectoryAdapter;
 import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
 import picker.prim.com.primpicker_core.ui.view.DirectorySpinner;
@@ -45,7 +46,8 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         View.OnClickListener,
         PrimSelectFragment.OnSelectFragmentListener,
         SelectAdapter.OnSelectItemListener,
-        DirectorySpinner.OnDirsItemSelectedListener {
+        DirectorySpinner.OnDirsItemSelectedListener,
+        OpenCaptureListener {
 
     private ImageView iv_picker_back;
 
@@ -69,14 +71,28 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private DirectoryAdapter directoryAdapter;
 
+    private CaptureCollection captureCollection;
+
+    public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
+    public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
+    public static final String EXTRA_RESULT_COMPRESS = "extra_result_compress";
+
+    public static final int ACTION_IMAGE_CAPTURE = 792;
+    public static final int ACTION_VIDEO_CAPTURE = 337;
+    public boolean isCompress;
+    public static final int REQUEST_CODE_PREVIEW = 601;
+    private TextView tv_pre;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
         selectItemCollection = new SelectItemCollection(this);
+        captureCollection = new CaptureCollection(this);
         iv_picker_back = (ImageView) findViewById(R.id.iv_picker_back);
         layout_bottom = (RelativeLayout) findViewById(R.id.layout_bottom);
         tv_picker_type = (TextView) findViewById(R.id.tv_picker_type);
+        tv_pre = (TextView) findViewById(R.id.tv_pre);
         btn_next = (TextView) findViewById(R.id.btn_next);
         cb_compress = (CheckBox) findViewById(R.id.cb_compress);
         container = (FrameLayout) findViewById(R.id.container);
@@ -92,18 +108,19 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         directorySpinner.setAdapter(directoryAdapter);
         iv_picker_back.setOnClickListener(this);
         btn_next.setOnClickListener(this);
+        tv_pre.setOnClickListener(this);
         cb_compress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isComprss = isChecked;
+                isCompress = isChecked;
             }
         });
-        isComprss = SelectSpec.getInstance().compress;
-        cb_compress.setChecked(isComprss);
+        isCompress = SelectSpec.getInstance().compress;
+        cb_compress.setChecked(isCompress);
         if (SelectSpec.getInstance().onlyShowVideos()) {
-            layout_bottom.setVisibility(View.VISIBLE);
+            cb_compress.setVisibility(View.VISIBLE);
         } else {
-            layout_bottom.setVisibility(View.GONE);
+            cb_compress.setVisibility(View.GONE);
         }
     }
 
@@ -161,12 +178,18 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTION_IMAGE_CAPTURE) {
+            //更新相册
+            captureCollection.updateImg();
+            //拍照回来后重新 加载数据
+            FileLoaderHelper.getInstance().getLoadDirs();
+        } else if (requestCode == ACTION_VIDEO_CAPTURE) {
+            //更新相册
+            captureCollection.updateVideo();
+            //录制视频完成回来后重新载入数据
+            FileLoaderHelper.getInstance().getLoadDirs();
+        }
     }
-
-    public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
-    public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
-    public static final String EXTRA_RESULT_COMPRESS = "extra_result_compress";
-    public boolean isComprss;
 
     @Override
     public void onClick(View v) {
@@ -179,18 +202,18 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
             ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
             result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
-            result.putExtra(EXTRA_RESULT_COMPRESS, isComprss);
+            result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
             setResult(RESULT_OK, result);
             finish();
+        } else if (i == R.id.tv_pre) {
+            PerviewActivity.newInstance(this, directory, null);
         }
     }
 
     @Override
-    public SelectItemCollection getSelectItemCollction() {
+    public SelectItemCollection getSelectItemCollection() {
         return selectItemCollection;
     }
-
-    public static final int REQUEST_CODE_PREVIEW = 601;
 
     @Override
     public void itemClick(View view, MediaItem item, int position) {
@@ -204,8 +227,12 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             btn_next.setTextColor(getResources().getColor(R.color.color_666666));
             btn_next.setEnabled(false);
             btn_next.setText(getResources().getString(R.string.str_next_text));
+            tv_pre.setEnabled(false);
+            tv_pre.setTextColor(getResources().getColor(R.color.color_8c8c8c));
         } else {
             btn_next.setEnabled(true);
+            tv_pre.setEnabled(true);
+            tv_pre.setTextColor(getResources().getColor(R.color.color_000000));
             btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
             btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
         }
@@ -219,5 +246,10 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             directory.addCaptureCount();
         }
         setData(directory);
+    }
+
+    @Override
+    public void capture() {
+        captureCollection.captureIntent();
     }
 }

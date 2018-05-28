@@ -6,4 +6,5 @@
     <string name="str_next_text">下一步</string>
     <string name="str_capture_video_text">拍摄视频</string>
     <string name="str_capture_img_text">拍摄照片</string>
+    <string name="str_pre_text">预览</string>
 </resources>

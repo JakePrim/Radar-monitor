@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
+import picker.prim.com.primpicker_core.listener.OpenCaptureListener;
 import picker.prim.com.primpicker_core.ui.view.CaptureView;
 import picker.prim.com.primpicker_core.ui.view.MediaGridView;
 
@@ -38,6 +38,9 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
     private RecyclerView recyclerView;
     private SelectSpec selectSpec;
     private SelectItemCollection selectItemCollection;
+    private WeakReference<OnSelectItemListener> mOnSelectItemListener;
+    private int mImageResize;
+    private static final String TAG = "SelectAdapter";
 
     public SelectAdapter(Context context, RecyclerView recyclerView, SelectItemCollection selectItemCollection) {
         super(null);
@@ -78,13 +81,13 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
             captureViewHolder.captureView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (mContext.get() instanceof OpenCaptureListener) {
+                        ((OpenCaptureListener) mContext.get()).capture();
+                    }
                 }
             });
         }
     }
-
-    private static final String TAG = "SelectAdapter";
 
     /** 检查选择的状态 防止勾选错乱 */
     private void checkSelectState(MediaItem item, MediaGridView mediaGridView) {
@@ -103,8 +106,6 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
         }
     }
 
-    private int mImageResize;
-
     private int getImageResize(Context context) {
         if (mImageResize == 0) {
             RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
@@ -117,7 +118,6 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
         }
         return mImageResize;
     }
-
 
     @Override
     public void clickItem(ImageView imageView, MediaItem item, RecyclerView.ViewHolder viewHolder) {
@@ -176,8 +176,6 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
 
         void onUpdate();
     }
-
-    private WeakReference<OnSelectItemListener> mOnSelectItemListener;
 
     public void registerSelectItemListener(OnSelectItemListener onSelectItemListener) {
         mOnSelectItemListener = new WeakReference<>(onSelectItemListener);

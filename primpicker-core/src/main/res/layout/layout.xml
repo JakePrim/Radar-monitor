@@ -81,6 +81,20 @@
             android:text="@string/str_compress"
             android:textColor="@color/color_666666"
             android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:enabled="false"
+            android:text="@string/str_pre_text"
+            android:textColor="@color/color_8c8c8c"
+            android:textSize="14sp"/>
     </RelativeLayout>
 
     <FrameLayout
