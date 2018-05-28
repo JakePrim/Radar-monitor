@@ -1,11 +1,8 @@
-package picker.prim.com.primpicker_core.ui;
+package picker.prim.com.primpicker_core.ui.view;
 
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.database.Cursor;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.ListPopupWindow;
 import android.view.View;
@@ -15,7 +12,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
-import picker.prim.com.primpicker_core.PathUtils;
+import picker.prim.com.primpicker_core.utils.PathUtils;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.Directory;
 
@@ -25,7 +22,6 @@ import picker.prim.com.primpicker_core.entity.Directory;
  * 版    本：1.0
  * 创建日期：5/25 0025
  * 描    述：文件夹选择弹窗
- * <p>
  * 修订历史：
  * ================================================
  */
@@ -117,8 +113,7 @@ public class DirectorySpinner {
             @Override
             public void onClick(View v) {
                 int itemHeight = v.getResources().getDimensionPixelSize(R.dimen.album_item_height);
-                popupWindow.setHeight(
-                        mAdapter.getCount() > MAX_SHOWN_COUNT ? itemHeight * MAX_SHOWN_COUNT
+                popupWindow.setHeight(mAdapter.getCount() > MAX_SHOWN_COUNT ? itemHeight * MAX_SHOWN_COUNT
                                 : itemHeight * mAdapter.getCount());
                 popupWindow.show();
             }

@@ -1,4 +1,4 @@
-package picker.prim.com.primpicker_core;
+package picker.prim.com.primpicker_core.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

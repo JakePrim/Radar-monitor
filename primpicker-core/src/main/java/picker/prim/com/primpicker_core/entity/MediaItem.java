@@ -50,7 +50,7 @@ public class MediaItem implements Parcelable {
         if (isImage()) {
             contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         } else if (isVideo()) {
-            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
         } else {
             contentUri = MediaStore.Files.getContentUri("external");
         }
@@ -82,7 +82,7 @@ public class MediaItem implements Parcelable {
     }
 
     public static final long ITEM_ID_CAPTURE = -1;
-    public static final String ITEM_DISPLAY_NAME_CAPTURE = "Capture";
+    public static final String ITEM_DISPLAY_NAME_CAPTURE = "CaptureView";
 
     public Uri getContentUri() {
         return uri;

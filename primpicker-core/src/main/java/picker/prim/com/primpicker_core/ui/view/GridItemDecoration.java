@@ -1,4 +1,4 @@
-package picker.prim.com.primpicker_core.ui;
+package picker.prim.com.primpicker_core.ui.view;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

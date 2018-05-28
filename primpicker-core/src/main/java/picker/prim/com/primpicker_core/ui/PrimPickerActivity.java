@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileLoaderCallback;
 import picker.prim.com.primpicker_core.cursors.FileLoaderHelper;
@@ -32,13 +30,14 @@ import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.adapter.DirectoryAdapter;
 import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
+import picker.prim.com.primpicker_core.ui.view.DirectorySpinner;
 
 /**
  * ================================================
  * 作    者：linksus
  * 版    本：1.0
  * 创建日期：5/24 0024
- * 描    述：这里参考了部分知乎的开源项目代码
+ * 描    述：选择文件的activity 这里参考了部分知乎的开源项目代码
  * 修订历史：
  * ================================================
  */
@@ -93,7 +92,6 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         directorySpinner.setAdapter(directoryAdapter);
         iv_picker_back.setOnClickListener(this);
         btn_next.setOnClickListener(this);
-        btn_next.setEnabled(false);
         cb_compress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -202,16 +200,13 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
     @SuppressLint("SetTextI18n")
     @Override
     public void onUpdate() {
-        Log.e(TAG, "onUpdate: ");
         if (selectItemCollection.isEmpty()) {
             btn_next.setTextColor(getResources().getColor(R.color.color_666666));
-            btn_next.setBackgroundColor(getResources().getColor(R.color.color_cccccc));
             btn_next.setEnabled(false);
             btn_next.setText(getResources().getString(R.string.str_next_text));
         } else {
             btn_next.setEnabled(true);
             btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
-            btn_next.setBackgroundColor(getResources().getColor(R.color.color_FA364A));
             btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
         }
     }

@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import picker.prim.com.primpicker_core.PathUtils;
+import picker.prim.com.primpicker_core.utils.PathUtils;
 
 /**
  * ================================================

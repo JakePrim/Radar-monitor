@@ -33,11 +33,14 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
             val str = StringBuffer()
-            str.append("返回结果:")
+            str.append("返回结果:").append("Uri:")
             for (uri in PrimPicker.obtainUriResult(data)) {
                 str.append(uri).append("\n")
             }
-
+            str.append(" path:")
+            for (s in PrimPicker.obtainPathResult(data)) {
+                str.append(s).append("\n")
+            }
             if (PrimPicker.obtainCompressResult(data)) {
                 str.append("压缩视频")
             } else {
@@ -63,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(Integer.parseInt(span))
                 .setMaxSelected(Integer.parseInt(max))
                 .showSingleMediaType(true)
+                .setCapture(true)
                 .forResult(1001)
     }
 
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(Integer.parseInt(span))
                 .setMaxSelected(Integer.parseInt(max))
                 .showSingleMediaType(true)
+                .setCapture(true)
                 .forResult(1001)
     }
 
@@ -98,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         PrimPicker
                 .with(this)
                 .choose(MimeType.ofAll())
+                .setCapture(true)
                 .setSpanCount(Integer.parseInt(span))
                 .setMaxSelected(Integer.parseInt(max))
                 .showSingleMediaType(true)

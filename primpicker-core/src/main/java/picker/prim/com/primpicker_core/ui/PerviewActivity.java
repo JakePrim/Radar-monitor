@@ -2,10 +2,8 @@ package picker.prim.com.primpicker_core.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Path;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 
 import picker.prim.com.primpicker_core.Constance;
-import picker.prim.com.primpicker_core.PathUtils;
+import picker.prim.com.primpicker_core.utils.PathUtils;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.Directory;
 import picker.prim.com.primpicker_core.entity.MediaItem;

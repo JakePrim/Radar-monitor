@@ -4,4 +4,6 @@
     <string name="str_empty_text">No Media Yet</string>
     <string name="str_compress">压缩视频</string>
     <string name="str_next_text">下一步</string>
+    <string name="str_capture_video_text">拍摄视频</string>
+    <string name="str_capture_img_text">拍摄照片</string>
 </resources>

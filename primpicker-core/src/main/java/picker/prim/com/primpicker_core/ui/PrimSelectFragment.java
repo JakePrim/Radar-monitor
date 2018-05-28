@@ -20,6 +20,7 @@ import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.adapter.SelectAdapter;
+import picker.prim.com.primpicker_core.ui.view.GridItemDecoration;
 
 /**
  * ================================================

@@ -3,10 +3,9 @@ package picker.prim.com.primpicker_core.ui.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,15 @@ import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
-import picker.prim.com.primpicker_core.ui.MediaGridView;
+import picker.prim.com.primpicker_core.ui.view.CaptureView;
+import picker.prim.com.primpicker_core.ui.view.MediaGridView;
 
 /**
  * ================================================
  * 作    者：linksus
  * 版    本：1.0
  * 创建日期：5/24 0024
- * 描    述：
+ * 描    述：选择文件的adapter
  * 修订历史：
  * ================================================
  */
@@ -53,7 +53,8 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_grid_item_layout, parent, false);
             return new MediaViewHolder(inflate);
         } else if (viewType == VIEW_TYPE_CAPTURE) {
-            return null;
+            View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_capture_item_layout, parent, false);
+            return new MediaCaptureViewHolder(inflate);
         }
         return null;
     }
@@ -72,12 +73,20 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
             mediaViewHolder.mediaGridView.bindPerImgInfo(new MediaGridView.PerImgInfo(getImageResize(mContext.get()), null, holder));
             mediaViewHolder.mediaGridView.bindMediaItem(item);
             checkSelectState(item, mediaViewHolder.mediaGridView);
+        } else if (holder instanceof MediaCaptureViewHolder) {
+            MediaCaptureViewHolder captureViewHolder = (MediaCaptureViewHolder) holder;
+            captureViewHolder.captureView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 
     private static final String TAG = "SelectAdapter";
 
-    /** 检查选择的状态 防止勾选错乱*/
+    /** 检查选择的状态 防止勾选错乱 */
     private void checkSelectState(MediaItem item, MediaGridView mediaGridView) {
         boolean checkNumOf = selectItemCollection.isSelected(item);
         if (checkNumOf) {
@@ -149,6 +158,16 @@ public class SelectAdapter extends CursorAdapter<RecyclerView.ViewHolder> implem
         public MediaViewHolder(View itemView) {
             super(itemView);
             mediaGridView = (MediaGridView) itemView;
+        }
+    }
+
+    private static class MediaCaptureViewHolder extends RecyclerView.ViewHolder {
+
+        private CaptureView captureView;
+
+        public MediaCaptureViewHolder(View itemView) {
+            super(itemView);
+            captureView = (CaptureView) itemView;
         }
     }
 

@@ -1,30 +1,27 @@
-package picker.prim.com.primpicker_core.ui;
+package picker.prim.com.primpicker_core.ui.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.hardware.GeomagneticField;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
 
 import java.lang.ref.WeakReference;
 
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
+import picker.prim.com.primpicker_core.entity.SelectSpec;
 
 /**
  * ================================================
@@ -64,8 +61,8 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
         init(context);
     }
 
-    private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.item_grid_layout, this, true);
+    private void init(final Context context) {
+        LayoutInflater.from(context).inflate(R.layout.lib_item_grid_layout, this, true);
 
         iv_media_thumbnail = (ImageView) findViewById(R.id.iv_media_thumbnail);
         media_select_cb = (CheckBox) findViewById(R.id.media_select_cb);
@@ -78,6 +75,11 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
         media_select_cb.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (media_select_cb.getAlpha() == 0.5f) {
+                    setChecked(false);
+                    Toast.makeText(context, "最多选择只能选择" + SelectSpec.getInstance().maxSelected + "个文件", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 boolean checked = media_select_cb.isChecked();
                 if (checked) {
                     media_select_view.setVisibility(VISIBLE);
@@ -93,7 +95,11 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
     }
 
     public void setCheckBox(boolean flag) {
-        media_select_cb.setEnabled(flag);
+        if (!flag) {
+            media_select_cb.setAlpha(0.5f);
+        } else {
+            media_select_cb.setAlpha(1.0f);
+        }
     }
 
     public void setChecked(boolean checked) {
