@@ -4,36 +4,26 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import picker.prim.com.primpicker_core.Constance;
+import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileMediaCallback;
+import picker.prim.com.primpicker_core.entity.Directory;
+import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectItemCollection;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.adapter.PerviewPageAdapter;
-import picker.prim.com.primpicker_core.utils.PathUtils;
-import picker.prim.com.primpicker_core.R;
-import picker.prim.com.primpicker_core.entity.Directory;
-import picker.prim.com.primpicker_core.entity.MediaItem;
 
 import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.REQUEST_CODE_PREVIEW;
 
@@ -121,7 +111,7 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
         if (selectItemCollection.count() > 0) {
             btn_next.setEnabled(true);
             btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
-            btn_next.setText(getResources().getString(R.string.str_next_text) + selectItemCollection.count());
+            btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
         } else {
             btn_next.setEnabled(false);
             btn_next.setTextColor(getResources().getColor(R.color.color_666666));
@@ -194,10 +184,8 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onPageSelected(int position) {
         PerviewPageAdapter adapter = (PerviewPageAdapter) viewpager.getAdapter();
-//        if (mPreviousPos != -1 && mPreviousPos != position) {
         MediaItem mediaItem = adapter.getMediaItem(position);
         checkSelectState(mediaItem);
-//        }
         mPreviousPos = position;
     }
 

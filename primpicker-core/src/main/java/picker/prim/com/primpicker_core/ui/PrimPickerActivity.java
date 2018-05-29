@@ -198,7 +198,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             boolean apply = data.getBooleanExtra(Constance.APPLY, false);
             selectItemCollection.clear();
             selectItemCollection.setDefaultItems(items);
-            if (apply) {
+            if (apply) {//预览选择完成
                 Intent result = new Intent();
                 ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
                 result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
@@ -207,7 +207,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
                 result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
                 setResult(RESULT_OK, result);
                 finish();
-            } else {
+            } else {//预览选择返回
                 Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(PrimSelectFragment.class.getSimpleName());
                 if (fragmentByTag instanceof PrimSelectFragment) {
                     ((PrimSelectFragment) fragmentByTag).refresh();

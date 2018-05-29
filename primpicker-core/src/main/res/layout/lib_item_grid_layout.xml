@@ -9,6 +9,15 @@
         tools:src="@tools:sample/avatars"/>
 
 
+    <ImageView
+        android:id="@+id/iv_media_gif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="2dp"
+        android:src="@drawable/ic_gif"/>
+
     <View
         android:id="@+id/media_select_view"
         android:layout_width="match_parent"
@@ -33,10 +42,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:padding="5dp"
         android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:drawablePadding="4dp"
         android:background="@color/color_tran"
-        android:button="@drawable/check_box_item_bg"/>
+        android:button="@drawable/check_box_item_bg"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:padding="5dp"/>
+
 </merge>

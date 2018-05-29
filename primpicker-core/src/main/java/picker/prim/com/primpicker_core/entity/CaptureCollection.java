@@ -14,16 +14,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.TextView;
-
-import com.bumptech.glide.load.Encoder;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.nio.channels.FileChannel;
-import java.util.HashMap;
 import java.util.List;
 
 import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.ACTION_IMAGE_CAPTURE;

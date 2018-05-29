@@ -16,11 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import java.lang.ref.WeakReference;
 
 import picker.prim.com.primpicker_core.R;
+import picker.prim.com.primpicker_core.engine.ImageEngine;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 
@@ -37,7 +36,7 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
 
     private MediaItem mediaItem;
 
-    private ImageView iv_media_thumbnail;
+    private ImageView iv_media_thumbnail, iv_media_gif;
 
     private CheckBox media_select_cb;
 
@@ -69,7 +68,7 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
         media_select_cb = (CheckBox) findViewById(R.id.media_select_cb);
         media_tv_time = (TextView) findViewById(R.id.media_tv_time);
         media_select_view = findViewById(R.id.media_select_view);
-
+        iv_media_gif = (ImageView) findViewById(R.id.iv_media_gif);
         iv_media_thumbnail.setOnClickListener(this);
         media_select_view.setOnClickListener(this);
 
@@ -129,20 +128,15 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
     }
 
     private void setImage() {
+        ImageEngine imageLoader = SelectSpec.getInstance().imageLoader;
+        if (imageLoader == null) {
+            throw new RuntimeException("most interface ImageEngine");
+        }
+        imageLoader.loadImage(getContext(), perImgInfo.mResize, perImgInfo.mResize, null, iv_media_thumbnail, mediaItem.getContentUri());
         if (mediaItem.isGif()) {
-            Glide.with(getContext())
-                    .load(mediaItem.getContentUri())
-                    .asGif()
-                    .override(perImgInfo.mResize, perImgInfo.mResize)
-                    .centerCrop()
-                    .into(iv_media_thumbnail);
+            iv_media_gif.setVisibility(VISIBLE);
         } else {
-            Glide.with(getContext())
-                    .load(mediaItem.getContentUri())
-                    .asBitmap()
-                    .override(perImgInfo.mResize, perImgInfo.mResize)
-                    .centerCrop()
-                    .into(iv_media_thumbnail);
+            iv_media_gif.setVisibility(GONE);
         }
     }
 

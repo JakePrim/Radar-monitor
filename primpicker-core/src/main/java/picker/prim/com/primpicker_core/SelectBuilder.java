@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 
 import java.util.Set;
 
+import picker.prim.com.primpicker_core.engine.ImageEngine;
 import picker.prim.com.primpicker_core.entity.MimeType;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.PrimPickerActivity;
@@ -28,6 +29,11 @@ public class SelectBuilder {
         this.primPicker = primPicker;
         selectSpec = SelectSpec.getCleanInstance();
         selectSpec.mimeTypes = mimeTypes;
+    }
+
+    public SelectBuilder setImageLoader(ImageEngine imageLoader) {
+        selectSpec.imageLoader = imageLoader;
+        return this;
     }
 
     public SelectBuilder showSingleMediaType(boolean showSingleMediaType) {

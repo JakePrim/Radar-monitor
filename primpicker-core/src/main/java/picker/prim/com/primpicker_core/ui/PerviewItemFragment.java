@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-
 import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
+import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.utils.PathUtils;
 
 /**
@@ -78,20 +76,9 @@ public class PerviewItemFragment extends Fragment {
         }
         Point size = PathUtils.getBitmapSize(item.getContentUri(), getActivity());
         if (item.isGif()) {
-            Glide.with(this)
-                    .load(item.getContentUri())
-                    .asGif()
-                    .override(size.x, size.y)
-                    .priority(Priority.HIGH)
-                    .fitCenter()
-                    .into(iv_per_thumbnail);
+            SelectSpec.getInstance().imageLoader.loadGifImage(getActivity(), size.x, size.y, null, iv_per_thumbnail, item.getContentUri());
         } else {
-            Glide.with(this)
-                    .load(item.getContentUri())
-                    .override(size.x, size.y)
-                    .priority(Priority.HIGH)
-                    .fitCenter()
-                    .into(iv_per_thumbnail);
+            SelectSpec.getInstance().imageLoader.loadImage(getActivity(), size.x, size.y, null, iv_per_thumbnail, item.getContentUri());
         }
     }
 

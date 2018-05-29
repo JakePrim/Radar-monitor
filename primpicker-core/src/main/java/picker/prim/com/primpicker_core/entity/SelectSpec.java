@@ -2,6 +2,8 @@ package picker.prim.com.primpicker_core.entity;
 
 import java.util.Set;
 
+import picker.prim.com.primpicker_core.engine.ImageEngine;
+
 /**
  * ================================================
  * 作    者：linksus
@@ -41,6 +43,9 @@ public class SelectSpec {
 
     /** 缩略图的比例 */
     public float thumbnailScale;
+
+    /** 图片加载器 */
+    public ImageEngine imageLoader;
 
     private void reset() {
         mimeTypes = null;

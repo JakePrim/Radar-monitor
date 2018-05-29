@@ -38,7 +38,8 @@ public class PerviewPageAdapter extends FragmentPagerAdapter {
     }
 
     public void addAllItems(List<MediaItem> itemList) {
-        mediaItems.addAll(itemList);
+        if (mediaItems != null)
+            mediaItems.addAll(itemList);
     }
 
     public MediaItem getMediaItem(int position) {

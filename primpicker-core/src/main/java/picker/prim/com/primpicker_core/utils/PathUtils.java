@@ -21,8 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
 /**
  * ================================================
  * 作    者：linksus
@@ -205,6 +203,8 @@ public class PathUtils {
             }
         }
     }
+
+    private static final String TAG = "PathUtils";
 
     private static boolean shouldRotate(ContentResolver resolver, Uri uri) {
         ExifInterface exif;
