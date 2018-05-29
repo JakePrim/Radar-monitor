@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,13 +82,19 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
                     return;
                 }
                 boolean checked = media_select_cb.isChecked();
-                if (checked) {
+                if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
+                    mOnMediaGridItemClick.get().clickSelectItem(checked, media_select_cb, mediaItem, perImgInfo.viewHolder);
+                }
+            }
+        });
+
+        media_select_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     media_select_view.setVisibility(VISIBLE);
                 } else {
                     media_select_view.setVisibility(GONE);
-                }
-                if (mOnMediaGridItemClick != null && mOnMediaGridItemClick.get() != null) {
-                    mOnMediaGridItemClick.get().clickSelectItem(checked, media_select_cb, mediaItem, perImgInfo.viewHolder);
                 }
             }
         });

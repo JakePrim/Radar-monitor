@@ -111,6 +111,10 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
         adapter.unRegisterSelectItemListener();
     }
 
+    public void refresh(){
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onMediaLoad(Cursor cursor) {
         adapter.setCursor(cursor);

@@ -80,7 +80,7 @@
             android:paddingStart="5dp"
             android:text="@string/str_compress"
             android:textColor="@color/color_666666"
-            android:textSize="13sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_pre"

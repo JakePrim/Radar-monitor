@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileLoaderCallback;
 import picker.prim.com.primpicker_core.cursors.FileLoaderHelper;
@@ -178,6 +180,9 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
         if (requestCode == ACTION_IMAGE_CAPTURE) {
             //更新相册
             captureCollection.updateImg();
@@ -188,6 +193,27 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             captureCollection.updateVideo();
             //录制视频完成回来后重新载入数据
             FileLoaderHelper.getInstance().getLoadDirs();
+        } else if (requestCode == REQUEST_CODE_PREVIEW) {
+            ArrayList<MediaItem> items = data.getParcelableArrayListExtra(Constance.EXTRA_DATA_ITEMS);
+            boolean apply = data.getBooleanExtra(Constance.APPLY, false);
+            selectItemCollection.clear();
+            selectItemCollection.setDefaultItems(items);
+            if (apply) {
+                Intent result = new Intent();
+                ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
+                result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+                ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
+                result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+                result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
+                setResult(RESULT_OK, result);
+                finish();
+            } else {
+                Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(PrimSelectFragment.class.getSimpleName());
+                if (fragmentByTag instanceof PrimSelectFragment) {
+                    ((PrimSelectFragment) fragmentByTag).refresh();
+                }
+                onUpdate();
+            }
         }
     }
 
@@ -206,7 +232,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             setResult(RESULT_OK, result);
             finish();
         } else if (i == R.id.tv_pre) {
-            PerviewActivity.newInstance(this, directory, null);
+            PerviewActivity.newInstance(this, directory, selectItemCollection.asList(), null, true);
         }
     }
 
@@ -217,7 +243,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     @Override
     public void itemClick(View view, MediaItem item, int position) {
-        PerviewActivity.newInstance(this, directory, item);
+        PerviewActivity.newInstance(this, directory, selectItemCollection.asList(), item, false);
     }
 
     @SuppressLint("SetTextI18n")
