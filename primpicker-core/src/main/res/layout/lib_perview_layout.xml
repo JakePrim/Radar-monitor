@@ -22,7 +22,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:padding="10dp"
-            android:src="@drawable/chose_image_back"/>
+            android:src="@drawable/icon_white_back"/>
 
         <TextView
             android:id="@+id/btn_next"

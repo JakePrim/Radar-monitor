@@ -75,8 +75,10 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_perview_layout);
+        getSupportActionBar().hide();
         item = getIntent().getParcelableExtra(Constance.EXTRA_DATA_ITEM);
         mediaItems = getIntent().getParcelableArrayListExtra(Constance.EXTRA_DATA_ITEMS);
         directory = getIntent().getParcelableExtra(Constance.EXTRA_DATA);
