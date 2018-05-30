@@ -90,7 +90,9 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         selectItemCollection = new SelectItemCollection(this);
         captureCollection = new CaptureCollection(this);
         iv_picker_back = (ImageView) findViewById(R.id.iv_picker_back);

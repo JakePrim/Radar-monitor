@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -78,7 +79,9 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_perview_layout);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         item = getIntent().getParcelableExtra(Constance.EXTRA_DATA_ITEM);
         mediaItems = getIntent().getParcelableArrayListExtra(Constance.EXTRA_DATA_ITEMS);
         directory = getIntent().getParcelableExtra(Constance.EXTRA_DATA);
@@ -162,6 +165,7 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
     /** 检查选择的状态 防止勾选错乱 */
     private void checkSelectState(MediaItem item) {
         boolean checkNumOf = selectItemCollection.isSelected(item);
+        Log.e(TAG, "checkSelectState: " + checkNumOf);
         if (checkNumOf) {
             cb_select.setAlpha(1.0f);
             cb_select.setChecked(true);
@@ -187,6 +191,7 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
     public void onPageSelected(int position) {
         PerviewPageAdapter adapter = (PerviewPageAdapter) viewpager.getAdapter();
         MediaItem mediaItem = adapter.getMediaItem(position);
+        Log.e(TAG, "onPageSelected: " + position);
         checkSelectState(mediaItem);
         mPreviousPos = position;
     }
@@ -211,6 +216,9 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
             int indexOf = mediaItems.indexOf(item);
             viewpager.setCurrentItem(indexOf, false);
             mPreviousPos = indexOf;
+            if (mPreviousPos == 0) {
+                checkSelectState(item);
+            }
         }
     }
 
