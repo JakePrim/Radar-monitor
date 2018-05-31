@@ -122,8 +122,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             }
         });
         isCompress = SelectSpec.getInstance().compress;
-        cb_compress.setChecked(isCompress);
-        if (SelectSpec.getInstance().onlyShowVideos()) {
+        if (SelectSpec.getInstance().onlyShowVideos() && isCompress) {
             cb_compress.setVisibility(View.VISIBLE);
         } else {
             cb_compress.setVisibility(View.GONE);
