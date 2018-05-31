@@ -53,17 +53,14 @@ public final class PrimPicker {
         return new SelectBuilder(this, types);
     }
 
-    /** 获取返回值 uri */
     public static List<Uri> obtainUriResult(Intent data) {
         return data.getParcelableArrayListExtra(EXTRA_RESULT_SELECTION);
     }
 
-    /** 获取返回值 string path */
     public static List<String> obtainPathResult(Intent data) {
         return data.getStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH);
     }
 
-    /** 获取返回值 boolean 是否压缩 */
     public static boolean obtainCompressResult(Intent data) {
         return data.getBooleanExtra(EXTRA_RESULT_COMPRESS, false);
     }

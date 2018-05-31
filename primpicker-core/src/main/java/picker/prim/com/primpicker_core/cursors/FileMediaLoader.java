@@ -139,11 +139,7 @@ public class FileMediaLoader extends CursorLoader {
     public static final long ITEM_ID_CAPTURE = -1;
     public static final String ITEM_DISPLAY_NAME_CAPTURE = "CaptureView";
 
-    /**
-     * 判断手机是否有录像设备
-     * @param context
-     * @return
-     */
+
     public static boolean hasCameraFeature(Context context) {
         PackageManager pm = context.getApplicationContext().getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);

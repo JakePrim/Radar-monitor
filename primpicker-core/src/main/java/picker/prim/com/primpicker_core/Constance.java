@@ -10,9 +10,6 @@ package picker.prim.com.primpicker_core;
  * ================================================
  */
 public class Constance {
-    /**
-     * picker file type
-     */
     public final static String EXTRA_FILE_TYPE = "EXTRA_FILE_TYPE";
 
     public final static String EXTRA_DATA = "EXTRA_DATA";

@@ -162,7 +162,6 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
         setResult(Activity.RESULT_OK, intent);
     }
 
-    /** 检查选择的状态 防止勾选错乱 */
     private void checkSelectState(MediaItem item) {
         boolean checkNumOf = selectItemCollection.isSelected(item);
         Log.e(TAG, "checkSelectState: " + checkNumOf);

@@ -156,7 +156,6 @@ public class PrimImageZoomView extends android.support.v7.widget.AppCompatImageV
         float x = 0, y = 0;
         //拿到触摸点的个数
         int pointerCount = event.getPointerCount();
-        Log.e(TAG, "onTouch: 触摸的点数:" + pointerCount);
         //得到多个触摸点的均值
         for (int i = 0; i < pointerCount; i++) {
             x += event.getX(i);
@@ -165,7 +164,6 @@ public class PrimImageZoomView extends android.support.v7.widget.AppCompatImageV
 
         x = x / pointerCount;
         y = y / pointerCount;
-        Log.e(TAG, "onTouch: 触摸点的均值 x:" + x + "|y:" + y);
         //每当触摸点发生变化时，改变lastx lasty
         if (pointerCount != lastPaintCount) {
             isCanDrg = false;
@@ -307,7 +305,10 @@ public class PrimImageZoomView extends android.support.v7.widget.AppCompatImageV
 
     }
 
-    /** 获取当前缩放比例 */
+    /**
+     * 获取当前缩放比例
+     * @return 当前的缩放比例
+     */
     public float getScale() {
         matrix.getValues(matrixValues);
         return matrixValues[Matrix.MSCALE_X];
