@@ -71,16 +71,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    lateinit var list: ArrayList<MediaItem>
-    lateinit var pathlist: List<String>
+    var list: ArrayList<MediaItem>? = null
+    var pathlist: List<String>? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
             val str = StringBuffer()
             list = PrimPicker.obtainItemsResult(data)
             pathlist = PrimPicker.obtainPathResult(data)
-            if (pathlist != null && pathlist.size >= 0) {
-                Glide.with(this).load("file://" + pathlist.get(0)).into(iv_one)
+            if (pathlist != null && pathlist!!.size >= 0) {
+                Glide.with(this).load("file://" + pathlist!!.get(0)).into(iv_one)
             } else {
                 iv_one.visibility = GONE
             }
