@@ -53,6 +53,7 @@ public class SelectSpec {
     public boolean isPreview;
 
     private void reset() {
+        mediaItems = null;
         mimeTypes = null;
         spanCount = 3;
         maxSelected = 1;

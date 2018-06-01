@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
@@ -77,7 +78,8 @@ class MainActivity : AppCompatActivity() {
             val str = StringBuffer()
             list = PrimPicker.obtainItemsResult(data)
             pathlist = PrimPicker.obtainPathResult(data)
-            if (pathlist != null && pathlist!!.size >= 0) {
+            if (pathlist != null && pathlist!!.isNotEmpty()) {
+                iv_one.visibility = VISIBLE
                 Glide.with(this).load("file://" + pathlist!!.get(0)).into(iv_one)
             } else {
                 iv_one.visibility = GONE

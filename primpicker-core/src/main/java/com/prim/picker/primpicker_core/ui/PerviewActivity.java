@@ -55,6 +55,8 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
 
     private MediaItem item;
 
+    private MediaItem currentItem;
+
     private static final String TAG = "PerviewActivity";
 
     private boolean isPer;
@@ -113,14 +115,21 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
 
     @SuppressLint("SetTextI18n")
     private void checkNextBtn() {
-        if (selectItemCollection.count() > 0) {
+        if (!SelectSpec.getInstance().isPreview) {
+            if (selectItemCollection.count() > 0) {
+                btn_next.setEnabled(true);
+                btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
+                btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
+            } else {
+                btn_next.setEnabled(false);
+                btn_next.setTextColor(getResources().getColor(R.color.color_666666));
+                btn_next.setText(getResources().getString(R.string.str_next_text));
+            }
+        } else {
+            cb_select.setVisibility(View.GONE);
             btn_next.setEnabled(true);
             btn_next.setTextColor(getResources().getColor(R.color.color_ffffff));
-            btn_next.setText(getResources().getString(R.string.str_next_text) + "(" + selectItemCollection.count() + ")");
-        } else {
-            btn_next.setEnabled(false);
-            btn_next.setTextColor(getResources().getColor(R.color.color_666666));
-            btn_next.setText(getResources().getString(R.string.str_next_text));
+            btn_next.setText(getResources().getString(R.string.str_next_del_text) + "(" + selectItemCollection.count() + ")");
         }
     }
 
@@ -130,14 +139,22 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
         super.onBackPressed();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.iv_picker_back) {
             onBackPressed();
         } else if (id == R.id.btn_next) {
-            sendBackResult(true);
-            finish();
+            if (selectItemCollection.count() == 1) {
+                selectItemCollection.remove(currentItem);
+                sendBackResult(true);
+                finish();
+            } else {
+                selectItemCollection.remove(currentItem);
+                adapter.deleteItems(currentItem);
+                btn_next.setText(getResources().getString(R.string.str_next_del_text) + "(" + selectItemCollection.count() + ")");
+            }
         } else if (id == R.id.cb_select) {
             if (cb_select.getAlpha() == 0.5f) {
                 cb_select.setChecked(false);
@@ -164,7 +181,6 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
 
     private void checkSelectState(MediaItem item) {
         boolean checkNumOf = selectItemCollection.isSelected(item);
-        Log.e(TAG, "checkSelectState: " + checkNumOf);
         if (checkNumOf) {
             cb_select.setAlpha(1.0f);
             cb_select.setChecked(true);
@@ -189,9 +205,8 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onPageSelected(int position) {
         PerviewPageAdapter adapter = (PerviewPageAdapter) viewpager.getAdapter();
-        MediaItem mediaItem = adapter.getMediaItem(position);
-        Log.e(TAG, "onPageSelected: " + position);
-        checkSelectState(mediaItem);
+        currentItem = adapter.getMediaItem(position);
+        checkSelectState(currentItem);
         mPreviousPos = position;
     }
 

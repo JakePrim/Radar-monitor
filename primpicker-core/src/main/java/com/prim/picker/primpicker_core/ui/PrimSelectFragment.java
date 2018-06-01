@@ -127,6 +127,7 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
             selectItemCollection.clear();
             selectItemCollection.setDefaultItems(mediaItems);
             adapter.notifyDataSetChanged();
+            onUpdate();
         }
     }
 

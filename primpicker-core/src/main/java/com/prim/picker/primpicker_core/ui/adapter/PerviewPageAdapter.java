@@ -3,6 +3,8 @@ package com.prim.picker.primpicker_core.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,26 @@ public class PerviewPageAdapter extends FragmentPagerAdapter {
     }
 
     public void addAllItems(List<MediaItem> itemList) {
-        if (mediaItems != null)
+        if (mediaItems != null) {
             mediaItems.addAll(itemList);
+        }
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (object instanceof View) {
+            container.removeView((View) object);
+        }
+    }
+
+    public void deleteItems(MediaItem item) {
+        mediaItems.remove(item);
+        notifyDataSetChanged();
     }
 
     public MediaItem getMediaItem(int position) {

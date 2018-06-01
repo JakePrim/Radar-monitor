@@ -12,7 +12,8 @@
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
-        android:layout_height="42dp">
+        android:layout_height="42dp"
+        android:background="@color/color_33000000">
 
         <ImageView
             android:id="@+id/iv_picker_back"
