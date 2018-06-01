@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<picker.prim.com.primpicker_core.ui.view.CaptureView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<com.prim.picker.primpicker_core.ui.view.CaptureView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="wrap_content">
 
-</picker.prim.com.primpicker_core.ui.view.CaptureView>
+</com.prim.picker.primpicker_core.ui.view.CaptureView>

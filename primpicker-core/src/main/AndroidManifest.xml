@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="picker.prim.com.primpicker_core">
+          package="com.prim.picker.primpicker_core">
 
     <application>
-        <activity android:name=".ui.PrimPickerActivity"/>
-        <activity android:name=".ui.PerviewActivity"/>
+        <activity android:name="com.prim.picker.primpicker_core.ui.PrimPickerActivity"/>
+        <activity android:name="com.prim.picker.primpicker_core.ui.PerviewActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}"

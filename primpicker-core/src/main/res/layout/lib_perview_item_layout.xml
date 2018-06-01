@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <picker.prim.com.primpicker_core.ui.view.PrimImageZoomView
+    <com.prim.picker.primpicker_core.ui.view.PrimImageZoomView
         android:id="@+id/iv_per_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
