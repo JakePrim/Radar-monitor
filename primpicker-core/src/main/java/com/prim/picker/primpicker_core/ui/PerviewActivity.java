@@ -146,14 +146,19 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
         if (id == R.id.iv_picker_back) {
             onBackPressed();
         } else if (id == R.id.btn_next) {
-            if (selectItemCollection.count() == 1) {
-                selectItemCollection.remove(currentItem);
+            if (SelectSpec.getInstance().isPreview) {
+                if (selectItemCollection.count() == 1) {
+                    selectItemCollection.clear();
+                    sendBackResult(true);
+                    finish();
+                } else {
+                    selectItemCollection.remove(currentItem);
+                    adapter.deleteItems(currentItem);
+                    btn_next.setText(getResources().getString(R.string.str_next_del_text) + "(" + selectItemCollection.count() + ")");
+                }
+            } else {
                 sendBackResult(true);
                 finish();
-            } else {
-                selectItemCollection.remove(currentItem);
-                adapter.deleteItems(currentItem);
-                btn_next.setText(getResources().getString(R.string.str_next_del_text) + "(" + selectItemCollection.count() + ")");
             }
         } else if (id == R.id.cb_select) {
             if (cb_select.getAlpha() == 0.5f) {
