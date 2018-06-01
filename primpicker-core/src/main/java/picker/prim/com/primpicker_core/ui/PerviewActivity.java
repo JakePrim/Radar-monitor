@@ -157,7 +157,7 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
 
     protected void sendBackResult(boolean apply) {
         Intent intent = new Intent();
-        intent.putParcelableArrayListExtra(Constance.EXTRA_DATA_ITEMS, selectItemCollection.asList());
+        intent.putParcelableArrayListExtra(Constance.EXTRA_DATA_ITEMS, selectItemCollection.asListOfItem());
         intent.putExtra(Constance.APPLY, apply);
         setResult(Activity.RESULT_OK, intent);
     }

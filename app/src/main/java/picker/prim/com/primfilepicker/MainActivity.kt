@@ -8,12 +8,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.transition.Visibility
 import android.view.View
+import android.view.View.GONE
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import picker.prim.com.primpicker_core.PrimPicker
 import picker.prim.com.primpicker_core.engine.ImageEngine
+import picker.prim.com.primpicker_core.entity.MediaItem
 import picker.prim.com.primpicker_core.entity.MimeType
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,19 @@ class MainActivity : AppCompatActivity() {
         btn_all.setOnClickListener({
             goAll()
         })
+
+        btn_current_add.setOnClickListener {
+            goadd()
+        }
+
+        iv_one.setOnClickListener {
+            PrimPicker
+                    .with(this)
+                    .preview(MimeType.ofImage())
+                    .setImageLoader(ImageLoader())
+                    .setPreviewItems(list)
+                    .forResult(1001)
+        }
     }
 
     class ImageLoader : ImageEngine {
@@ -55,10 +71,19 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    lateinit var list: ArrayList<MediaItem>
+    lateinit var pathlist: List<String>
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
             val str = StringBuffer()
+            list = PrimPicker.obtainItemsResult(data)
+            pathlist = PrimPicker.obtainPathResult(data)
+            if (pathlist != null && pathlist.size >= 0) {
+                Glide.with(this).load("file://" + pathlist.get(0)).into(iv_one)
+            } else {
+                iv_one.visibility = GONE
+            }
             str.append("返回结果:").append("Uri:").append("\n")
             for (uri in PrimPicker.obtainUriResult(data)) {
                 str.append(uri).append("\n")
@@ -74,6 +99,19 @@ class MainActivity : AppCompatActivity() {
             }
             result.text = str.toString()
         }
+    }
+
+    fun goadd() {
+        PrimPicker
+                .with(this)
+                .choose(MimeType.ofImage())
+                .setSpanCount(3)
+                .setMaxSelected(9)
+                .setImageLoader(ImageLoader())
+                .showSingleMediaType(true)
+                .setCapture(true)
+                .setDefaultItems(list)
+                .forResult(1001)
     }
 
     fun goImg() {

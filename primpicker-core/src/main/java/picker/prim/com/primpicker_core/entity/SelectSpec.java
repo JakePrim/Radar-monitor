@@ -1,5 +1,6 @@
 package picker.prim.com.primpicker_core.entity;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import picker.prim.com.primpicker_core.engine.ImageEngine;
@@ -47,12 +48,17 @@ public class SelectSpec {
     /** 图片加载器 */
     public ImageEngine imageLoader;
 
+    public ArrayList<MediaItem> mediaItems;
+
+    public boolean isPreview;
+
     private void reset() {
         mimeTypes = null;
         spanCount = 3;
         maxSelected = 1;
         capture = false;
         compress = false;
+        isPreview = false;
         showSingleMediaType = false;
         thumbnailScale = 0.5f;
     }

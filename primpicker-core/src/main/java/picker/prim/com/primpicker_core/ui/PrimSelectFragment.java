@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import picker.prim.com.primpicker_core.Constance;
 import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.cursors.FileMediaCallback;
@@ -48,6 +50,8 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
 
     private SelectAdapter.OnSelectItemListener onSelectItemListener;
 
+    private ArrayList<MediaItem> mediaItems;
+
     public static PrimSelectFragment newInstance(Directory directory) {
         PrimSelectFragment fragment = new PrimSelectFragment();
         Bundle args = new Bundle();
@@ -83,6 +87,7 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mediaItems = SelectSpec.getInstance().mediaItems;
         selectItemCollection = onSelectFragmentListener.getSelectItemCollection();
         Directory directory = getArguments().getParcelable(Constance.EXTRA_DATA);
         adapter = new SelectAdapter(getActivity(), recyclerView, selectItemCollection);
@@ -111,13 +116,18 @@ public class PrimSelectFragment extends Fragment implements FileMediaCallback.Me
         adapter.unRegisterSelectItemListener();
     }
 
-    public void refresh(){
+    public void refresh() {
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onMediaLoad(Cursor cursor) {
         adapter.setCursor(cursor);
+        if (mediaItems != null && mediaItems.size() > 0) {
+            selectItemCollection.clear();
+            selectItemCollection.setDefaultItems(mediaItems);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

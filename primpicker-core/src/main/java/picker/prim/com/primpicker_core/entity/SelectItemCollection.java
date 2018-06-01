@@ -50,7 +50,7 @@ public class SelectItemCollection {
         return mediaItems.contains(item);
     }
 
-    public ArrayList<MediaItem> asList() {
+    public ArrayList<MediaItem> asListOfItem() {
         return new ArrayList<>(mediaItems);
     }
 

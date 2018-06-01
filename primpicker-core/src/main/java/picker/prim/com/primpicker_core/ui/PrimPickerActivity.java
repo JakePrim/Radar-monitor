@@ -63,7 +63,8 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private FrameLayout container, layout_empty;
 
-    private SelectItemCollection selectItemCollection;
+    private SelectItemCollection selectItemCollection = new SelectItemCollection(this);
+    ;
 
     private Directory directory;
 
@@ -73,11 +74,12 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     private DirectoryAdapter directoryAdapter;
 
-    private CaptureCollection captureCollection;
+    private CaptureCollection captureCollection = new CaptureCollection(this);
 
     public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
     public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
     public static final String EXTRA_RESULT_COMPRESS = "extra_result_compress";
+    public static final String EXTRA_RESULT_ITEMS = "extra_result_items";
 
     public static final int ACTION_IMAGE_CAPTURE = 792;
     public static final int ACTION_VIDEO_CAPTURE = 337;
@@ -93,8 +95,10 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        selectItemCollection = new SelectItemCollection(this);
-        captureCollection = new CaptureCollection(this);
+        if (SelectSpec.getInstance().isPreview) {
+            PerviewActivity.newInstance(this, directory, SelectSpec.getInstance().mediaItems, null, true);
+            return;
+        }
         iv_picker_back = (ImageView) findViewById(R.id.iv_picker_back);
         layout_bottom = (RelativeLayout) findViewById(R.id.layout_bottom);
         tv_picker_type = (TextView) findViewById(R.id.tv_picker_type);
@@ -202,22 +206,31 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
             selectItemCollection.clear();
             selectItemCollection.setDefaultItems(items);
             if (apply) {//预览选择完成
-                Intent result = new Intent();
-                ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
-                result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
-                ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
-                result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
-                result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
-                setResult(RESULT_OK, result);
-                finish();
+                selectFinish(selectItemCollection);
             } else {//预览选择返回
-                Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(PrimSelectFragment.class.getSimpleName());
-                if (fragmentByTag instanceof PrimSelectFragment) {
-                    ((PrimSelectFragment) fragmentByTag).refresh();
+                if (SelectSpec.getInstance().isPreview) {
+                    selectFinish(selectItemCollection);
+                } else {
+                    Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(PrimSelectFragment.class.getSimpleName());
+                    if (fragmentByTag instanceof PrimSelectFragment) {
+                        ((PrimSelectFragment) fragmentByTag).refresh();
+                    }
+                    onUpdate();
                 }
-                onUpdate();
             }
         }
+    }
+
+    private void selectFinish(SelectItemCollection selectItemCollection) {
+        Intent result = new Intent();
+        ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
+        result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+        ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
+        result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+        result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
+        result.putParcelableArrayListExtra(EXTRA_RESULT_ITEMS, selectItemCollection.asListOfItem());
+        setResult(RESULT_OK, result);
+        finish();
     }
 
     @Override
@@ -226,16 +239,9 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
         if (i == R.id.iv_picker_back) {
             finish();
         } else if (i == R.id.btn_next) {
-            Intent result = new Intent();
-            ArrayList<Uri> selectedUris = (ArrayList<Uri>) selectItemCollection.asListOfUri();
-            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
-            ArrayList<String> selectedPaths = (ArrayList<String>) selectItemCollection.asListOfString();
-            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
-            result.putExtra(EXTRA_RESULT_COMPRESS, isCompress);
-            setResult(RESULT_OK, result);
-            finish();
+            selectFinish(selectItemCollection);
         } else if (i == R.id.tv_pre) {
-            PerviewActivity.newInstance(this, directory, selectItemCollection.asList(), null, true);
+            PerviewActivity.newInstance(this, directory, selectItemCollection.asListOfItem(), null, true);
         }
     }
 
@@ -246,7 +252,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
 
     @Override
     public void itemClick(View view, MediaItem item, int position) {
-        PerviewActivity.newInstance(this, directory, selectItemCollection.asList(), item, false);
+        PerviewActivity.newInstance(this, directory, selectItemCollection.asListOfItem(), item, false);
     }
 
     @SuppressLint("SetTextI18n")
@@ -270,7 +276,7 @@ public class PrimPickerActivity extends AppCompatActivity implements FileLoaderC
     @Override
     public void onDirItemSelected(AdapterView<?> parent, View view, int position, long id) {
         directoryAdapter.getCursor().moveToPosition(position);
-        Directory directory = Directory.valueOf(directoryAdapter.getCursor());
+        directory = Directory.valueOf(directoryAdapter.getCursor());
         if (directory.isAll() && SelectSpec.getInstance().capture) {
             directory.addCaptureCount();
         }

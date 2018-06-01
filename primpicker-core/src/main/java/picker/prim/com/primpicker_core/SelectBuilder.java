@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import picker.prim.com.primpicker_core.engine.ImageEngine;
+import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.MimeType;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.ui.PrimPickerActivity;
@@ -56,8 +58,29 @@ public class SelectBuilder {
         return this;
     }
 
+    /**
+     * 是否进行压缩
+     *
+     * @param compress
+     *         true 是 FALSE 否
+     *
+     * @return SelectBuilder
+     */
     public SelectBuilder setCompress(boolean compress) {
         selectSpec.compress = compress;
+        return this;
+    }
+
+    /**
+     * 默认选择的数据
+     *
+     * @param mediaItems
+     *         数据
+     *
+     * @return SelectBuilder
+     */
+    public SelectBuilder setDefaultItems(ArrayList<MediaItem> mediaItems) {
+        selectSpec.mediaItems = mediaItems;
         return this;
     }
 

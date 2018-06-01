@@ -6,12 +6,15 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.MimeType;
 
 import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_COMPRESS;
+import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_ITEMS;
 import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_SELECTION;
 import static picker.prim.com.primpicker_core.ui.PrimPickerActivity.EXTRA_RESULT_SELECTION_PATH;
 
@@ -53,6 +56,12 @@ public final class PrimPicker {
         return new SelectBuilder(this, types);
     }
 
+    public PreviewBuilder preview(Set<MimeType> types) {
+        return new PreviewBuilder(this, types);
+    }
+
+    //=========================================  对返回数据的处理 start ================================================//
+
     public static List<Uri> obtainUriResult(Intent data) {
         return data.getParcelableArrayListExtra(EXTRA_RESULT_SELECTION);
     }
@@ -64,6 +73,12 @@ public final class PrimPicker {
     public static boolean obtainCompressResult(Intent data) {
         return data.getBooleanExtra(EXTRA_RESULT_COMPRESS, false);
     }
+
+    public static ArrayList<MediaItem> obtainItemsResult(Intent data) {
+        return data.getParcelableArrayListExtra(EXTRA_RESULT_ITEMS);
+    }
+
+    //=========================================  对返回数据的处理 end ================================================//
 
     Activity getActivity() {
         return mContext != null ? mContext.get() : null;
