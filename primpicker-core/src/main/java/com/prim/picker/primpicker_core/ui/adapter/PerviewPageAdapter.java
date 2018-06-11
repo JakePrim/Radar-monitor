@@ -3,6 +3,7 @@ package com.prim.picker.primpicker_core.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,6 +24,10 @@ import com.prim.picker.primpicker_core.ui.PerviewItemFragment;
  */
 public class PerviewPageAdapter extends FragmentPagerAdapter {
     ArrayList<MediaItem> mediaItems = new ArrayList<>();
+
+    private long baseId = 0;
+
+    private static final String TAG = "PerviewPageAdapter";
 
     public PerviewPageAdapter(FragmentManager fm) {
         super(fm);
@@ -50,11 +55,16 @@ public class PerviewPageAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        if (object instanceof View) {
-            container.removeView((View) object);
-        }
+    public long getItemId(int position) {
+        return baseId + position;
     }
+
+//    @Override
+//    public void destroyItem(ViewGroup container, int position, Object object) {
+//        if (object instanceof View) {
+//            container.removeView((View) object);
+//        }
+//    }
 
     public void deleteItems(MediaItem item) {
         mediaItems.remove(item);
@@ -63,5 +73,11 @@ public class PerviewPageAdapter extends FragmentPagerAdapter {
 
     public MediaItem getMediaItem(int position) {
         return mediaItems.get(position);
+    }
+
+    public void notifyChangeInPosition(int n) {
+        // shift the ID returned by getItemId outside the range of all previous fragments
+        baseId += getCount() + n;
+        Log.e(TAG, "notifyChangeInPosition: " + baseId);
     }
 }

@@ -153,6 +153,7 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                 } else {
                     selectItemCollection.remove(currentItem);
+                    adapter.notifyChangeInPosition(1);
                     adapter.deleteItems(currentItem);
                     btn_next.setText(getResources().getString(R.string.str_next_del_text) + "(" + selectItemCollection.count() + ")");
                 }
