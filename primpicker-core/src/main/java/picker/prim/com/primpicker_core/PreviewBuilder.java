@@ -54,7 +54,7 @@ public class PreviewBuilder {
      * 所以从选择文件得到的数据,你可以做任何操作，然后将这些数据传入即可.
      *
      * @param mediaItems
-     *         ArrayList<MediaItem>
+     *         ArrayList
      *
      * @return PreviewBuilder
      */
