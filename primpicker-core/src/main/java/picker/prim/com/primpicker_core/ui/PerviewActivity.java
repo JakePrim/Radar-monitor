@@ -108,7 +108,8 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
             adapter.addAllItems(mediaItems);
             adapter.notifyDataSetChanged();
             cb_select.setChecked(true);
-            if (SelectSpec.getInstance().perviewCurrentItem != 0) {
+            if (SelectSpec.getInstance().perviewCurrentItem != -1) {
+                currentItem = mediaItems.get(SelectSpec.getInstance().perviewCurrentItem);
                 viewpager.setCurrentItem(SelectSpec.getInstance().perviewCurrentItem, false);
             }
         } else {
@@ -166,8 +167,11 @@ public class PerviewActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                 } else {
                     selectItemCollection.remove(currentItem);
+                    mediaItems.remove(currentItem);
                     adapter.notifyChangeInPosition(1);
                     adapter.deleteItems(currentItem);
+                    int item = viewpager.getCurrentItem();
+                    currentItem = mediaItems.get(item);
                     btn_next.setText(getResources().getString(R.string.str_delete_text) + "(" + selectItemCollection.count() + ")");
                 }
             } else {

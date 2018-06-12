@@ -43,6 +43,49 @@ android.permission.CAMERA
 
 Coding:
 
+首先需要设置图片加载器,此处自己实现 ImageEngine 接口,好处:本库不用再导入图片加载库了，防止项目中图片加载库冲突或多个图片加载库
+
+需要注意的是:
+ 加载缩略图设置图片类型为centerCrop();
+ 加载预览图设置图片类型为fitCenter();
+```
+class ImageLoader : ImageEngine {
+        override fun loadImageThumbnail(context: Context?, resize: Int, placeholder: Drawable?, view: ImageView?, uri: Uri?) {
+            Glide.with(context).load(uri).asBitmap().placeholder(placeholder).override(resize, resize).centerCrop().into(view)
+        }
+
+        override fun loadImage(context: Context?, resizeX: Int, resizeY: Int, placeholder: Drawable?, view: ImageView?, uri: Uri?) {
+            Glide.with(context).load(uri).asBitmap().placeholder(placeholder).override(resizeX, resizeY).fitCenter().into(view)
+        }
+
+        override fun loadGifThumbnail(context: Context?, resize: Int, placeholder: Drawable?, view: ImageView?, uri: Uri?) {
+            Glide.with(context).load(uri).asGif().placeholder(placeholder).override(resize, resize).centerCrop().into(view)
+        }
+
+        override fun loadGifImage(context: Context?, resizeX: Int, resizeY: Int, placeholder: Drawable?, view: ImageView?, uri: Uri?) {
+            Glide.with(context).load(uri).asGif().placeholder(placeholder).override(resizeX, resizeY).into(view)
+        }
+
+    }
+```
+
+
+```
+ /**
+     * 设置图片加载器,此处自己实现 ImageEngine 接口,
+     * 好处:本库不用再导入图片加载库了，防止项目中图片加载库冲突或多个图片加载库
+     *
+     * @param imageLoader
+     *         图片加载器
+     *
+     * @return PreviewBuilder
+     */
+    public PreviewBuilder setImageLoader(ImageEngine imageLoader) {
+        this.selectSpec.imageLoader = imageLoader;
+        return this;
+    }
+ ```
+
 select file(选择文件)
 ```
           PrimPicker

@@ -97,7 +97,7 @@ public class SelectSpec {
         isPerClickShowSingle = false;
         thumbnailScale = 0.5f;
         selectVideoMaxSizeKB = 0;
-        perviewCurrentItem = 0;
+        perviewCurrentItem = -1;
         selectVideoMaxSizeM = 0;
         selectVideoMaxDuration = 0;
     }
