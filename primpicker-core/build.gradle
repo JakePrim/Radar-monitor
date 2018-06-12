@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: "bintrayUpload.gradle"
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
@@ -11,10 +11,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
 
-    compileOptions {
-        encoding "UTF-8"
     }
 
     buildTypes {
@@ -34,3 +31,16 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
 }
 
+//添加
+publish {
+    userOrg = 'jakeprim'//bintray.com用户名
+    groupId = 'com.prim.lib'//jcenter上的路径
+    artifactId = 'prim-picker'//项目名称
+    publishVersion = '1.0.2'//版本号
+    desc = 'This is an android file selector'
+    website = 'https://github.com/JakePrim/PrimFilePicker'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+}

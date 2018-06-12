@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/color_000000">
@@ -13,7 +14,7 @@
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="@color/color_33000000">
+        android:background="@drawable/bg_picker_preview_cover_top">
 
         <ImageView
             android:id="@+id/iv_picker_back"
@@ -27,7 +28,7 @@
 
         <TextView
             android:id="@+id/btn_next"
-            android:layout_width="80dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -41,11 +42,12 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
+            android:singleLine="true"
             android:text="@string/str_next_text"
             android:textColor="@color/color_666666"/>
     </RelativeLayout>
 
-    <CheckBox
+    <picker.prim.com.primpicker_core.ui.view.PrimCheckBox
         android:id="@+id/cb_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,5 +60,9 @@
         android:background="@color/color_tran"
         android:button="@drawable/check_box_item_bg"
         android:textColor="@color/color_666666"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        app:color_background="#FA364A"
+        app:color_border="#FFFFFFFF"
+        app:size="18dp"/>
+
 </RelativeLayout>

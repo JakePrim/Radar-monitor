@@ -3,10 +3,17 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.prim.picker.primpicker_core.ui.view.TouchImageView
-        android:id="@+id/iv_per_thumbnail"
+    <picker.prim.com.primpicker_core.ui.view.TouchImageView
+        android:id="@+id/iv_per_thumbnail_photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    
+    <ImageView
+        android:id="@+id/iv_per_thumbnail_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/btn_video_play"

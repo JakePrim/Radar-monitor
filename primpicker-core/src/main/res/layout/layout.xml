@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/btn_next"
-            android:layout_width="80dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -42,6 +42,7 @@
             android:background="@drawable/select_next_btn"
             android:enabled="false"
             android:gravity="center"
+            android:singleLine="true"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

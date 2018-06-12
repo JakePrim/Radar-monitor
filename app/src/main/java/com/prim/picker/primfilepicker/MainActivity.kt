@@ -13,10 +13,10 @@ import android.view.View.VISIBLE
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
-import com.prim.picker.primpicker_core.PrimPicker
-import com.prim.picker.primpicker_core.engine.ImageEngine
-import com.prim.picker.primpicker_core.entity.MediaItem
-import com.prim.picker.primpicker_core.entity.MimeType
+import picker.prim.com.primpicker_core.PrimPicker
+import picker.prim.com.primpicker_core.engine.ImageEngine
+import picker.prim.com.primpicker_core.entity.MediaItem
+import picker.prim.com.primpicker_core.entity.MimeType
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     .preview(MimeType.ofImage())
                     .setImageLoader(ImageLoader())
                     .setPreviewItems(list)
-                    .forResult(1001)
+                    .lastGo(1001)
         }
     }
 
@@ -108,10 +108,10 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(3)
                 .setMaxSelected(9)
                 .setImageLoader(ImageLoader())
-                .showSingleMediaType(true)
+                .setShowSingleMediaType(true)
                 .setCapture(true)
                 .setDefaultItems(list)
-                .forResult(1001)
+                .lastGo(1001)
     }
 
     fun goImg() {
@@ -130,9 +130,9 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(Integer.parseInt(span))
                 .setMaxSelected(Integer.parseInt(max))
                 .setImageLoader(ImageLoader())
-                .showSingleMediaType(true)
+                .setShowSingleMediaType(true)
                 .setCapture(true)
-                .forResult(1001)
+                .lastGo(1001)
     }
 
     fun goVideo() {
@@ -151,9 +151,9 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(Integer.parseInt(span))
                 .setMaxSelected(Integer.parseInt(max))
                 .setImageLoader(ImageLoader())
-                .showSingleMediaType(true)
+                .setShowSingleMediaType(true)
                 .setCapture(true)
-                .forResult(1001)
+                .lastGo(1001)
     }
 
     fun goAll() {
@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
                 .setSpanCount(Integer.parseInt(span))
                 .setImageLoader(ImageLoader())
                 .setMaxSelected(Integer.parseInt(max))
-                .showSingleMediaType(true)
-                .forResult(1001)
+                .setShowSingleMediaType(true)
+                .lastGo(1001)
     }
 }
