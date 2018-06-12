@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.prim.picker.primfilepicker.MainActivity">
 
-    <EditText
-        android:id="@+id/et_maxCount"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="最多可选择几个"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="53dp"/>
+        android:layout_gravity="center"
+        android:text="PrimPicker"
+        android:textColor="#000"
+        android:textSize="18sp"/>
 
-    <EditText
-        android:id="@+id/et_spanCount"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_maxCount"
-        android:hint="显示几列"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置最多可选择几个文件："/>
+
+        <EditText
+            android:id="@+id/et_maxCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="默认为1"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置文件几行显示"/>
+
+        <EditText
+            android:id="@+id/et_spanCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="默认3行"
+            android:textSize="14sp"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_spanCount"
-        android:text="查找视频类型的文件"/>
+        android:text="选择视频类型的文件"/>
 
     <Button
         android:id="@+id/btn_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_video"
-        android:text="查找图片类型的文件"/>
+        android:text="选择图片类型的文件"/>
 
     <Button
         android:id="@+id/btn_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_img"
-        android:text="查找所有类型的文件"/>
+        android:text="所有类型的文件"/>
 
     <Button
         android:id="@+id/btn_current_add"
@@ -68,15 +96,5 @@
             android:id="@+id/iv_one"
             android:layout_width="100dp"
             android:layout_height="100dp"/>
-
-        <ImageView
-            android:id="@+id/iv_two"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-
-        <ImageView
-            android:id="@+id/iv_other"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
