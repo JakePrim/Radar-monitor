@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.prim.lib:prim-picker:1.0.3'
+    compile 'com.prim.lib:prim-picker:1.0.4'
 }
 ```
 
