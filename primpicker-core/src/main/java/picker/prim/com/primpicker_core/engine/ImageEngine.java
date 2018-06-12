@@ -15,11 +15,11 @@ import android.widget.ImageView;
  * ================================================
  */
 public interface ImageEngine {
-    void loadImage(Context context, int resize, Drawable placeholder, ImageView view, Uri uri);
+    void loadImageThumbnail(Context context, int resize, Drawable placeholder, ImageView view, Uri uri);
 
     void loadImage(Context context, int resizeX, int resizeY, Drawable placeholder, ImageView view, Uri uri);
 
-    void loadGifImage(Context context, int resize, Drawable placeholder, ImageView view, Uri uri);
+    void loadGifThumbnail(Context context, int resize, Drawable placeholder, ImageView view, Uri uri);
 
     void loadGifImage(Context context, int resizeX, int resizeY, Drawable placeholder, ImageView view, Uri uri);
 }

@@ -60,7 +60,7 @@ public class DirectoryAdapter extends CursorAdapter {
         ((TextView) view.findViewById(R.id.tv_dirs_name)).setText(directory.getDisplayName(context));
         ((TextView) view.findViewById(R.id.tv_dirs_count)).setText(String.valueOf(directory.getmCount()));
 
-        SelectSpec.getInstance().imageLoader.loadImage(context, context.getResources().getDimensionPixelSize(R
+        SelectSpec.getInstance().imageLoader.loadImageThumbnail(context, context.getResources().getDimensionPixelSize(R
                 .dimen.media_grid_size), mPlaceholder, ((ImageView) view.findViewById(R.id.iv_dirs_item)), Uri.fromFile(new File(directory.getmCoverPath())));
     }
 }

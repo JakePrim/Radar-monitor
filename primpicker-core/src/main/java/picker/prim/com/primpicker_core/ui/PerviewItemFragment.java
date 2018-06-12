@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import picker.prim.com.primpicker_core.R;
 import picker.prim.com.primpicker_core.entity.MediaItem;
 import picker.prim.com.primpicker_core.entity.SelectSpec;
 import picker.prim.com.primpicker_core.utils.PathUtils;
+import picker.prim.com.primpicker_core.utils.PhotoMetadataUtils;
 
 /**
  * ================================================
@@ -30,7 +32,7 @@ import picker.prim.com.primpicker_core.utils.PathUtils;
 public class PerviewItemFragment extends Fragment {
 
     private MediaItem item;
-            
+
     private ImageView iv_per_thumbnail, btn_video_play;
 
     public static PerviewItemFragment newInstance(MediaItem item) {
@@ -52,6 +54,8 @@ public class PerviewItemFragment extends Fragment {
         return inflater.inflate(R.layout.lib_perview_item_layout, container, false);
     }
 
+    private static final String TAG = "PerviewItemFragment";
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -59,20 +63,20 @@ public class PerviewItemFragment extends Fragment {
         item = getArguments().getParcelable(Constance.EXTRA_DATA);
 
         if (item == null) return;
-        
+
         initView(view);
-        
+
         bindView();
 
     }
-    
-    private void initView(View container){
+
+    private void initView(View container) {
         iv_per_thumbnail = (ImageView) container.findViewById(isVideoType() ? R.id.iv_per_thumbnail_video : R.id.iv_per_thumbnail_photo);
         btn_video_play = (ImageView) container.findViewById(R.id.btn_video_play);
     }
-    
-    private void bindView(){
-        
+
+    private void bindView() {
+
         iv_per_thumbnail.setVisibility(View.VISIBLE);
 
         if (isVideoType()) {
@@ -92,8 +96,12 @@ public class PerviewItemFragment extends Fragment {
         } else {
             btn_video_play.setVisibility(View.GONE);
         }
-        
-        Point size = PathUtils.getBitmapSize(item.getContentUri(), getActivity());
+
+
+        Point size = PhotoMetadataUtils.getBitmapSize(item.getContentUri(), getActivity());
+
+        Log.e(TAG, "bindView: " + size);
+
         if (item.isGif()) {
             SelectSpec.getInstance().imageLoader.loadGifImage(getActivity(), size.x, size.y, null, iv_per_thumbnail, item.getContentUri());
         } else {
@@ -105,8 +113,8 @@ public class PerviewItemFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-    
-    private boolean isVideoType(){
+
+    private boolean isVideoType() {
         return item.isVideo();
     }
 }

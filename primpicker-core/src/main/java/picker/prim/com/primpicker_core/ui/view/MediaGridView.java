@@ -154,10 +154,12 @@ public class MediaGridView extends FrameLayout implements View.OnClickListener {
         if (imageLoader == null) {
             throw new RuntimeException("most interface ImageEngine");
         }
-        imageLoader.loadImage(getContext(), perImgInfo.mResize, perImgInfo.mResize, null, iv_media_thumbnail, mediaItem.getContentUri());
+
         if (mediaItem.isGif()) {
+            imageLoader.loadGifThumbnail(getContext(), perImgInfo.mResize, null, iv_media_thumbnail, mediaItem.getContentUri());
             iv_media_gif.setVisibility(VISIBLE);
         } else {
+            imageLoader.loadImageThumbnail(getContext(), perImgInfo.mResize, null, iv_media_thumbnail, mediaItem.getContentUri());
             iv_media_gif.setVisibility(GONE);
         }
     }
