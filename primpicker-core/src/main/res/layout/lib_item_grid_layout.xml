@@ -43,13 +43,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:background="@color/color_tran"
         android:gravity="center"
         android:padding="5dp"
         app:color_background="#FA364A"
         app:color_border="#FFFFFFFF"
-        app:size="18dp"/>
+        app:size="20dp"/>
 
 </merge>
