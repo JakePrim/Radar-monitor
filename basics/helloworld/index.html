@@ -16,7 +16,7 @@
         <button v-on:click="handleBtn">提交</button>
         <ul>
             <!-- <li v-for="item in list">{{item}}</li> -->
-            <todo-item v-bind:content="item" v-for="item in list" @delete="handleItemDelete">
+            <todo-item :content="item" index="index" v-for="(item,index) in list" @delete="handleItemDelete">
             </todo-item>
         </ul>
     </div>
@@ -29,14 +29,16 @@
         // });
 
         //局部组件 注意局部组件需要注册到Vue实例中
+        //v-bind:content 简写 -> :content
         var TodoItem = {
-            props: ['content'],//设置接收参数
+            props: ['content','index'],//设置接收参数
             template: "<li @click='handleItemClick'>{{content}}</li>",//组件的模板 v-on:click = @click
             methods: {
                 handleItemClick:function(){
                     console.log("item click");
                     //子组件向父组件传值 子组件自定义一个事件
-                    this.$emit("delete");
+
+                    this.$emit("delete",this.index);
                 }
             },
         }
@@ -62,8 +64,9 @@
                     this.list.push(this.inputValue);
                     this.inputValue = '';//清空input
                 },
-                handleItemDelete:function(){
-                    console.log("delete");
+                handleItemDelete:function(index){
+                    console.log("delete",index);
+                    this.list.splice(index,1);
                 }
             },
         });
