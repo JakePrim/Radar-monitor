@@ -14,12 +14,21 @@
 </head>
 <body>
     <div id="app">
-        <!-- class的样式是activated 有没有这个样式取决于isActivated=true 就有显示class="activated"
-            v-bind:class="{activated:isActivated}"
-            另一种写法：v-bind:class="[activated]" 绑定data属性activated,activated赋值的是Class的name
+        <!--
+            第一种写法: 
+            class的样式是activated 有没有这个样式取决于isActivated=true 就有显示class="activated"
+            v-bind:class="{activated:isActivated,activatedOne:isActivatedOne}"
+            第二种写法：
+            v-bind:class="[activated]" 绑定data属性activated,activated赋值的是Class的name
             可以定义多个[] 数组结构
         -->
-        <div v-on:click="handleClick" v-bind:class="[activated]">Hello World!</div>
+        <div v-on:click="handleClick" v-bind:class="[activated,activatedOne]">Hello World!</div>
+        <!-- 动态添加style样式 内联样式 同样两种方式
+            对象的定义样式
+            数组定义的样式可以挂载多个对象
+        -->
+        <div v-bind:style="styleObj" @click="handleStyleClick">style hello world</div>
+        <div v-bind:style="[styleObj,fontObj]" @click="handleStyleClick">style hello world</div>
     </div>
     <script>
         //class 与 style绑定
@@ -27,6 +36,13 @@
             el:"#app",
             data:{
                 activated:"",
+                activatedOne:"activated-one",
+                styleObj:{
+                    color:"black",
+                },
+                fontObj:{
+                    fontSize:"20px",
+                }
             },
             methods: {
                 handleClick:function(){
@@ -37,6 +53,9 @@
                     //     this.activated = "activated";
                     // }
                     this.activated === "activated" ? this.activated = "" : this.activated = "activated";
+                },
+                handleStyleClick:function(){
+                    this.styleObj.color = this.styleObj.color === "black" ? "red" : "black";
                 }
             },
         });
