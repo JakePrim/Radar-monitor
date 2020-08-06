@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 的模板语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{name + ' lee'}}
+        <!-- v-text === innerText -->
+        <div v-text="name + ' lee'"></div>
+        <!-- v-html === innerHTML -->
+        <div v-html="name + ' lee'"></div>
+        <!-- 还有一些v-click: v-bind: 等等这些指令可以在项目中进行属性使用即可 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                name: "<h1>Jake</h1>"
+            }
+        });
+    </script>
+</body>
+
+</html>

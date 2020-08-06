@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class与Style</title>
+    <script src="../vue.js"></script>
+    <style>
+        .activated{
+            color:red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- class的样式是activated 有没有这个样式取决于isActivated=true 就有显示class="activated"
+            v-bind:class="{activated:isActivated}"
+            另一种写法：v-bind:class="[activated]" 绑定data属性activated,activated赋值的是Class的name
+            可以定义多个[] 数组结构
+        -->
+        <div v-on:click="handleClick" v-bind:class="[activated]">Hello World!</div>
+    </div>
+    <script>
+        //class 与 style绑定
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                activated:"",
+            },
+            methods: {
+                handleClick:function(){
+                    // this.isActivated = !this.isActivated;
+                    // if (this.activated === "activated") {
+                    //     this.activated = "";
+                    // }else{
+                    //     this.activated = "activated";
+                    // }
+                    this.activated === "activated" ? this.activated = "" : this.activated = "activated";
+                }
+            },
+        });
+    </script>
+</body>
+</html>
