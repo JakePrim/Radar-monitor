@@ -10,9 +10,11 @@
 
 <body>
     <div id="app">
-        <!-- in / of 不用index作为key值 使用后台返回的ID作为key值 -->
+        <!-- in / of 不用index作为key值 使用后台返回的ID作为key值 
+            v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略 为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的唯一 id。这个特殊的属性相当于 Vue 1.x 的 track-by ，但它的工作方式类似于一个属性，所以你需要用 v-bind:key(:key) 来绑定动态值
+        -->
         <!-- vue 不能使用下标的方式去改变数组,list[0] = .... 这样是无法刷新页面的
-            而是使用 push pop shift unshift splice sort reverse 
+            而是使用数组的变异方法： push pop shift unshift splice sort reverse
             vm.list.splice(1,1,{id:"222",text:"1"}); 改变数组中的某一个值
             还可以通过改变引用的方式改变数组
             vm.list = [{
@@ -28,7 +30,7 @@
                     }];
         -->
         <!-- template 模板占位符 不会被真正的渲染在页面上 这样就不用:key优化了 :key="item.id" -->
-        <template v-for="(item,index) of list" >
+        <template v-for="(item,index) of list">
             <div>
                 {{item.text}}-----{{index}}
             </div>
@@ -67,13 +69,16 @@
                         text: "hello2"
                     }
                 ],
-                userInfo:{
-                    name:"dell",
-                    age:27,
-                    gender:"man",
-                    salary:"secret",
+                userInfo: {
+                    name: "dell",
+                    age: 27,
+                    gender: "man",
+                    salary: "secret",
                 }
-            }
+            },
+            methods: {
+                
+            },
         });
     </script>
 </body>

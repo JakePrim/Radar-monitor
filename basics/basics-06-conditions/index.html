@@ -15,11 +15,17 @@
         <div v-else-if="test === 'b'">this is b</div>
         <!-- v-if v-else-if v-else 要紧贴在一起使用 如果有其他标签阻隔那么就会报错 -->
         <div v-else>Bye World!</div>
-        <!-- 如果show=false 显示的是：<div style="display: none;">hello world</div> 在页面上依然存在 dom中还存在v-show 隐藏和显示-->
+        <!-- 如果show=false 显示的是：<div style="display: none;">hello world</div> 在页面上依然存在 dom中还存在v-show 隐藏和显示
+            注意，v-show 不支持 <template> 元素，也不支持 v-else
+        -->
         <div v-show="show">{{message}}</div>
         <!-- input 添加key值 vue知道是一个唯一的元素 不会复用之前的标签了 -->
         <div v-if="show"> 用户名:<input type="text" name="" id="" key="username"> </div>
         <div v-else> 邮箱名:<input type="text" name="" id=""  key="email"> </div>
+        <!-- 
+            一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+
+        -->
     </div>
     <script>
         const vm = new Vue({
