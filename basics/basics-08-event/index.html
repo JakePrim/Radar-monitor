@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../vue.js"></script>
 </head>
+
 <body>
     <div id="app">
-
+        <!-- 事件绑定 添加括号后e，就没有了，如果要事件对象需要添加$event
+            添加括号的好处就是可以传递参数
+        -->
+        <button @click="handlerClick($event,1,'test')">Button</button>
+        <!-- 阻止form表单的跳转 prevent === @click="handleForm" == e.preventDefault() 阻止事件的默认行为
+        还有很多修饰符：@click.stop 阻止事件向外冒泡 ；@click.self 只有点击form表单的事件才会感知到
+        -->
+        <form action="/abc"  @click.prevent>
+            <input type="submit" value="提交">
+        </form>
+        <div>
+            
+        </div>
     </div>
     <script>
         const vm = new Vue({
-            el:"#app",
-            data:{
-                
-            }
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                handlerClick: function (e, ont, two) {
+                    console.log(e, ont, two);
+                }, 
+                handleForm: function(e){
+                    e.preventDefault();
+                    console.log("阻止事件点击的默认行为");
+                },
+            },
         });
     </script>
 </body>
+
 </html>
