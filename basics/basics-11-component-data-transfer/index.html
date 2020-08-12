@@ -16,7 +16,12 @@
 
         const counter= {
             props:['count'],
-            template:'<div>{{count}}</div>'
+            template:'<div @click="handleClick">{{count}}</div>',
+            methods: {
+                handleClick:function(){
+                    
+                }
+            },
         }
 
         const vm = new Vue({
