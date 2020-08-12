@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件的数据传递</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 子组件通过属性的形式向父组件传值 :表示是数字-->
+        <counter :count="0"></counter>
+        <counter :count="1"></counter>
+    </div>
+    <script>
+
+        const counter= {
+            props:['count'],
+            template:'<div>{{count}}</div>'
+        }
+
+        const vm = new Vue({
+            el:"#app",
+            components:{
+                counter:counter
+            }
+        });
+    </script>
+</body>
+</html>

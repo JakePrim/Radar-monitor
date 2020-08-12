@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <!-- 1 tbody 要求必须是tr,借助vue提供的is属性,还是tr标签添加is属性保证是row的一个组件
+                    注意这个问题
+                -->
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+        <!-- ul ol section 这些组合标签的都需要使用is属性 -->
+        <!-- <ul>
+            <li is="row"></li>
+            <li is="row"></li>
+            <li is="row"></li>
+        </ul> -->
+
+        <!-- 3 通过ref属性 使vue操作dom -->
+        <div ref="hello" @click="handleClick">hello world</div>
+
+        <counter ref="one" @change="handelChange"></counter>
+        <counter ref="two" @change="handelChange"></counter>
+        <!-- 对两个counter 子组件进行求和 -->
+        <div>{{total}}</div>
+
+
+    </div>
+
+    <script>
+        Vue.component('row', {
+            //2 子组件data必须是一个函数，而不能是一个对象
+            data: function () {
+                return {
+                    content: "this is content"
+                }
+            },
+            template: "<tr><td>{{content}}</td></tr>"
+        });
+
+        //计数器组件
+        Vue.component('counter', {
+            data: function () {
+                return {
+                    number: 0
+                }
+            },
+            template: '<div v-on:click="counterClick">{{number}}</div>',
+            methods:{
+                //注意组件的事件 必须在组件内部定义 不能再Vue实例中定义否则会报错
+                counterClick: function () {
+                    this.number++;
+                    //子组件向父组件传值 触发change事件
+                    this.$emit('change');
+                }
+            }
+        });
+
+        const vm = new Vue({
+            el: "#app",
+            data:{
+                total:0
+            },
+            methods: {
+                handleClick: function () {
+                    // alert("click");
+                    //$refs 当前vue实例的所用dom引用，找到hello引用 指向的就是dom节点
+                    console.log(this.$refs.hello);
+                },
+                handelChange:function(){
+                    console.log("change");
+                    //求和
+                    // console.log(this.$refs.one);
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
