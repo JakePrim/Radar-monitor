@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 中的表单绑定</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <input type="text" v-model="value">{{value}}
+        <hr>
+        <textarea v-model="value1"></textarea>
+        {{value1}}
+        <hr>
+        <input type="checkbox" v-model="check">{{check}}
+        <hr>
+        <input type="radio" v-model="radio" value="test">{{radio}}
+        <hr>
+        <select v-model="select">
+            <option disabled>---------请选择---------</option>
+            <!-- value v-model对应option的Value值；如果没有value v-model指向option的innerText -->
+            <option value="1">A</option>
+            <option value="2">B</option>
+            <option value="3">C</option>
+        </select>
+        {{select}}
+        <hr>
+        <span>修饰符：lazy input失去焦点的时候在进行同步</span>
+
+        <input type="text" v-model.lazy="value2">{{value2}}
+        <hr>
+        <span>修饰符：number 如果值可以转换为number类型就会转换为number类型</span>
+        <input type="text" v-model.number="value3">{{value3}}
+        <hr>
+        <span>修饰符：trim 移除首尾的空格</span>
+        <input type="text" v-model.trim="value4">{{value4}}
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                value:"",
+                value1:"",
+                value2:"",
+                check:"",
+                radio:"",
+                select:"",
+                value3:"",
+                value4:""
+            },
+            watch:{
+                value3:function(){
+                    console.log(typeof this.value3);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
