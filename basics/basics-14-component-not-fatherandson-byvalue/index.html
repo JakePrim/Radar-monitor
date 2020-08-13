@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件间的传值问题(Bus/发布订阅模式/观察者模式/总线)</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!-- 子组件套用子组件 非父子组件的传值问题：发布订阅模式(总线模式)
+        1 父组件
+        2 子组件
+        3 子组件
+        ... 子组件
+    -->
+    <div id="app">
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+    <script>
+        //每个Vue的实例都会有一个bus的属性 都指向同一个vue实例
+        Vue.prototype.bus = new Vue();
+
+        Vue.component('child',{
+            props:{
+                content:String
+            },
+            template:'<div @click="handleClick">{{content}}</div>',
+            methods: {
+                handleClick:function(){
+                    this.bus.$emit('change',this.content);
+                }
+            },
+            mounted() {
+                const _this = this;
+                this.bus.$on('change',function(msg){
+                    _this.content = msg
+                })
+            },
+        })
+
+        const vm = new Vue({
+            el:"#app",
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给组件绑定原生事件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 给组件绑定原生事件 只需要加native修饰符 -->
+        <child @click.native="handleClick"></child>
+    </div>
+    <script>
+
+        Vue.component('child',{
+            template:'<div>child</div>',
+            // methods: {
+            //     childClick:function(){
+            //         this.$emit('change');//触发自定义事件
+            //     }
+            // },
+            
+        });
+
+        const vm = new Vue({
+            el:"#app",
+            methods: {
+                handleClick:function(){
+                    alert('click');
+                }
+            },
+        });
+    </script>
+</body>
+</html>
