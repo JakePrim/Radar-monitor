@@ -12,6 +12,7 @@
         2 子组件
         3 子组件
         ... 子组件
+        也可以通过vuex解决非父子组件传值的问题
     -->
     <div id="app">
         <child content="Dell"></child>
@@ -21,24 +22,30 @@
         //每个Vue的实例都会有一个bus的属性 都指向同一个vue实例
         Vue.prototype.bus = new Vue();
 
+        //创建一个组件
         Vue.component('child',{
-            props:{
-                content:String
-            },
-            template:'<div @click="handleClick">{{content}}</div>',
-            methods: {
-                handleClick:function(){
-                    this.bus.$emit('change',this.content);
+            data:function(){
+                return {
+                    selfContent:this.content,//拷贝content原因 父组件传递过来的参数子组件不能进行改变
                 }
             },
-            mounted() {
-                const _this = this;
-                this.bus.$on('change',function(msg){
-                    _this.content = msg
-                })
+            props:{
+                content:String //父组件传递过来的参数 子组件不能改变
+            },
+            template:'<div @click="handleClick">{{selfContent}}</div>',
+            methods: {
+                handleClick:function(){
+                    //当子组件被点击的时候 传递给另一个组件
+                    this.bus.$emit('change',this.selfContent);
+                }
+            },
+            mounted() {//当组件被转载后 监听change事件
+                this.bus.$on('change',(msg)=>{
+                    //虽然改变了值但是会发生警告，原因是子组件不能改变父组件传递过来的内容
+                    this.selfContent = msg
+                });
             },
         })
-
         const vm = new Vue({
             el:"#app",
         });

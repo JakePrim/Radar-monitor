@@ -19,7 +19,7 @@
     <script>
         Vue.component('child',{
             props:{//props特性 dom参数不会显示在dom中
-                content:[Number,String],//约束参数的类型
+                content:[Number,String],//约束参数的类型 多个类型约束
                 obj:{//参数的更高级的写法
                     type:String,//设置参数的类型
                     required:false,//是否必须要传递参数

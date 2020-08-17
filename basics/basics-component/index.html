@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>组件的基础</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button-counter title="My Jake"></button-counter>
+			<button-counter title="My Prim"></button-counter>
+			<button-counter></button-counter>
+			<!-- 渲染组件列表 需要通过v-bind来动态传递prop -->
+			<post-blog v-for="item of posts" v-bind:title="item.title" v-bind:key="item.id"></post-blog>
+		</div>
+		<script type="text/javascript">
+			//创建一个组件 组件是一个可复用的Vue实例
+			//组件必须先注册以便Vue识别 下面是全局注册组件的方式
+			Vue.component('button-counter',{
+				//组件中的data必须是一个函数
+				data:function(){
+					return{
+						count:0,
+					}
+				},
+				template:'<button v-on:click="count++">You click me {{count}} times {{title}}</button>',
+				//向组件传值
+				props:['title']
+			});
+			Vue.component('post-blog',{
+				props:['title'],
+				template:'<h3>{{title}}</h3>'
+			})
+			
+			const vm = new Vue({
+				el:'#app',
+				data:{
+					posts:[
+						{id:1,title:'my 1'},
+						{id:2,title:'my 2'},
+						{id:3,title:'my 3'},
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件与v-once指令</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- v-once 只渲染一次 无论数据如何变化都不会再重新渲染 -->
+    <div id="app">
+        <!-- Vue中的动态组件 -->
+        <!-- <component :is="show"></component> -->
+        <!-- 手动的写法 -->
+        <!-- <child-one v-if="show === 'child-one'"></child-one>
+        <child-two v-if="show === 'child-two'"></child-two>
+        <button @click="handleBtn">change</button> -->
+    </div>
+    <script>
+        Vue.component('child-one', {
+            template: `<div>child one</div>`
+        });
+        Vue.component('child-two', {
+            template: `<div>child two</div>`
+        })
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                show: 'child-one'
+            },
+            //
+            template: `
+            <div v-once>
+            <child-one v-if="show === 'child-one'" />
+            <child-two v-if="show === 'child-two'" />
+            <button @click="handleBtn">change</button>
+            </div>
+            `,
+            methods: {
+                handleBtn: function () {
+                    this.show = this.show === 'child-one' ? 'child-two' : 'child-one';
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
