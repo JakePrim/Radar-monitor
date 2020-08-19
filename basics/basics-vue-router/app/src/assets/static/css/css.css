@@ -1,0 +1,290 @@
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    color: #3a3a3a;
+    background: #F5F5F5;
+    height: 100%;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #3a3a3a;
+}
+a:hover {
+    color: #ca141d;
+}
+
+
+.form-item {
+    margin-bottom: 22px;
+}
+
+.tal {
+    text-align: left;
+}
+.tar {
+    text-align: right;
+}
+.tac {
+    text-align: center;
+}
+
+.form-input {
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #333;
+}
+.form-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+.form-button.primary {
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+}
+.form-button.success {
+    color: #fff;
+    background-color: #67c23a;
+    border-color: #67c23a;
+}
+.form-button.info {
+    color: #fff;
+    background-color: #909399;
+    border-color: #909399;
+}
+.form-button.warning {
+    color: #fff;
+    background-color: #e6a23c;
+    border-color: #e6a23c;
+}
+.form-button.danger {
+    color: #fff;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+
+.panel {
+    padding: 10px;
+    background-color: white;
+}
+.panel h2 {
+    margin: 20px 0;
+}
+
+#header {
+    margin: 0 auto;
+    padding: 20px 0;
+    background: #fff;
+    height: 40px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+    font-size: 16px;
+    line-height: 40px;
+}
+#header a {
+    margin-right: 24px;
+    color: #333;
+}
+#header a:hover {
+    color: #ca141d;
+}
+#logo {
+    float: left;
+    padding: 0 20px;
+    width: 157px;
+    height: 40px;
+    background: url('../images/logo.png') no-repeat center;
+}
+#nav {
+    float: left;
+}
+#user {
+    float: right;
+}
+
+#main {
+    margin: 20px auto;
+    width: 1200px;
+}
+
+
+
+.items-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.items-list li.panel {
+    border: 10px solid #F5F5F5;
+    width: 260px;
+    text-align: center;
+}
+.items-list li.panel .cover {
+    width: 200px;
+    height: 220px;
+}
+.items-list li.panel .name {
+    overflow: hidden;
+    text-align: left;
+    height: 30px;
+    line-height: 30px;
+}
+.items-list li.panel .price {
+    text-align: left;
+    font-weight: bold;
+    line-height: 24px;
+    color: #ca141d;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.flex-column-checkbox {
+    width: 80px;
+}
+.flex-column-name {
+    flex: 1;
+}
+.flex-column-price {
+    width: 150px;
+}
+.flex-column-quantity {
+    width: 150px;
+}
+.flex-column-total {
+    width: 150px;
+}
+.flex-column-operation {
+    width: 150px;
+}
+.cart-items-list .flex-column-name {
+    text-align: left;
+}
+
+.flex-column-name .cover {
+    width: 100px;
+    height: 100px;
+}
+.flex-column-name .name {
+    vertical-align: top;
+}
+.cart-items-list .flex-column-quantity {
+    font-size: 0;
+}
+.cart-items-list .flex-column-quantity .quantity-add, .cart-items-list .flex-column-quantity .quantity-num, .cart-items-list .flex-column-quantity .quantity-sub {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
+}
+.cart-items-list .flex-column-quantity .quantity-num {
+    width: 60px;
+}
+
+.cart-footer {
+    margin-bottom: 10px;
+}
+.cart-footer.panel {
+    padding: 0;
+    height: 60px;
+    line-height: 60px;
+}
+.cart-footer :first-child {
+    margin-left: 5px;
+}
+.cart-footer .quantity, .cart-footer .total {
+    color: #ca151e;
+}
+.cart-footer .total {
+    font-size: 20px;
+}
+.cart-footer .pay-btn {
+    padding: 0 20px;
+    display: inline-block;
+    height: 60px;
+    font-size: 30px;
+    line-height: 60px;
+    background-color: #ca151e;
+    color: white;
+    cursor: pointer;
+}
+.cart-footer .pay-btn.disabled {
+    background-color: rgb(194, 189, 189);
+    cursor: not-allowed;
+}
+
+
+.pagination-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 0 14px;
+    margin-right: 5px;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #333;
+}
+.pagination a:hover {
+    border-color: #3a3a3a;
+    background-color: #3a3a3a;
+    color: white;
+}
+.pagination a.current {
+    padding: 1px 15px;
+    border: 0 none;
+    background-color: transparent;
+    color: #e4393c;
+    cursor: default;
+}
+
+.cart-items-list {
+
+}
+
+
+#register .form-item .form-input, #login .form-item .form-input {
+    width: 300px;
+}
+#register .form-item .txt, #login .form-item .txt {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
