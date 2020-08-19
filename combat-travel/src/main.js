@@ -9,10 +9,16 @@ import 'styles/border.css'
 // 引入iconfont @ 符号代表src目录
 import 'styles/iconfont.css'
 import fastclick from 'fastclick'
+// 引入轮播图npm模块
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 导入轮播图的样式
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 // 移动端300ms点击事件延迟的问题解决
 fastclick.attach(document.body)
+
+Vue.use(VueAwesomeSwiper)
 
 /* eslint-disable no-new */
 new Vue({
