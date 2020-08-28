@@ -21,8 +21,8 @@ export default {
   data: function () {
     return {
       swiperOptions: {
-        pagination: '.swiper-pagination',
-        loop: true// 循环轮播
+        pagination: '.swiper-pagination'
+        // loop: true// 循环轮播
       },
       iconList: [
         {
@@ -74,10 +74,11 @@ export default {
     }
   },
   computed: {
+    // 计算属性 计算页数
     pages () {
       const pagesList = []
       this.iconList.forEach((item, index) => {
-        // 计算页数
+        // 计算页数，每页8个元素
         const page = Math.floor(index / 8)
         if (!pagesList[page]) {
           pagesList[page] = []
