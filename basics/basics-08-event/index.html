@@ -14,6 +14,8 @@
             添加括号的好处就是可以传递参数
         -->
         <button @click="handlerClick($event,1,'test')">Button</button>
+
+        
         <!-- 阻止form表单的跳转 prevent === @click="handleForm" == e.preventDefault() 阻止事件的默认行为
         还有很多修饰符：@click.stop 阻止事件向外冒泡 ；@click.self 只有点击form表单的事件才会感知到
         -->
