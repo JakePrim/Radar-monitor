@@ -1,7 +1,7 @@
 
 <template>
     <div class="icons_warp">
-      <swiper :options="swiperOptions">
+      <swiper>
         <swiper-slide v-for="(page,index) of pages" :key="index">
           <div class="item" v-for='item of page' :key="item.id">
             <div class="image">
@@ -10,7 +10,7 @@
             <div class="icon_title">{{item.name}}</div>
           </div>
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
+        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
       </swiper>
     </div>
 </template>
@@ -20,10 +20,6 @@ export default {
   name: 'HomeIcons',
   data: function () {
     return {
-      swiperOptions: {
-        pagination: '.swiper-pagination'
-        // loop: true// 循环轮播
-      },
       iconList: [
         {
           id: 1,
@@ -96,6 +92,8 @@ export default {
   .icons_warp >>> .swiper-container
     height: 0
     padding-bottom: 50%
+  .icons_warp
+    margin-top : .1rem
     .item
       width : 25%
       height : 0
