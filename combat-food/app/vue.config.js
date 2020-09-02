@@ -1,0 +1,14 @@
+module.exports={
+    publicPath:'/',
+    devServer:{
+        proxy:{//配置开发代理
+            'api/':{
+                target:'http://127.0.0.1:7001',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/api':''
+                }
+            }
+        }
+    }
+}

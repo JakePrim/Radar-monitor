@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <!-- 路径对应的组件会替换掉 -->
     <router-view/>
   </div>
 </template>
