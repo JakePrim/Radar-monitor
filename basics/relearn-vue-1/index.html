@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app" class="root">
+			<h1>挂载点</h1>
+		</div>
+		<script>
+			/**
+			 * 模板引擎 主要有两点
+			 * 	- 数据
+			 *  - 模板
+			 * 组件：
+			 * 	对具有特定的独立的或者可复用的模板的封装 new Vue() => 应用
+			 * 注意Vue2.x中的组件:
+			 * 	- 根组件 在一个Vue的应用中，有且仅有一个根组件，类似于HTML标签
+			 *  - 可复用组件 一个应用根组件中就是由N个可复用的组件组合而成的
+			 */
+			//组件在创建的时候 接收一个配置参数，Vue内部就会根据这个配置参数来处理组件内部的逻辑：数据 拦截 绑定 模板渲染等
+			let app = new Vue({
+				//data：数据 用来存放该组件需要使用到的数据
+				data:{
+					title:'hello vue'
+				},
+				//template:模板 
+				template:`
+					<div id="app">
+						<h1>Vue</h1>
+						<p>{{title}}</p>
+					</div>
+				`,
+				//模板渲染完成以后的DOM的挂载点
+				el:".root",//挂载点 将模板挂载到某个dom上 如果你添加到了HTML的某个dom那么template会把这个dom覆盖掉 template 将会被解析生成HTML
+			});
+		</script>
+	</body>
+</html>

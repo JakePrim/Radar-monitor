@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>数据</h1>
+    </div>
+    <script>
+        let data ={
+            a:1
+        }
+        let vm = new Vue({
+            el:'#app',
+            data
+        });
+        let vm2 = new Vue({
+            el:'#app',
+            data
+        });
+        //数据变化以后是以组件为单位 进行渲染和更新的
+
+        vm.a = 100;
+        //vm2 data中的数据也会被修改
+        vm2.a //100
+
+        //data 一般可以写函数模式 执行以后得到的是不同的对象
+        let data = function(){
+            return {
+                a:1
+            }
+        }
+    </script>
+</body>
+</html>

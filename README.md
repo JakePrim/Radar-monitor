@@ -10,30 +10,30 @@ Vue 是前端必须要深度掌握的技术栈，掌握好Vue是非常必要的�
 
 |文章名称|文章简介|文章链接|代码地址|
 |:----|:----|:----|:----|
-|《模板&条件&指令》|掌握Vue最基础的使用：模板语法、事件绑定、计算属性、侦听器、条件渲染、双向绑定|[链接](https://shimo.im/docs/JKhXXCkPtxpVtdCh/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《组件开发》|Vue的三大核心之一：**组件**组件是必须要掌握的知识点：组件的定义、组件的传参、组件与父组件的传值等|[链接](https://shimo.im/docs/Yvhrd8VCQXGCvTWw/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《动画》|Vue.js 对动画进行了封装可以更加方便的实现动画效果|[链接](https://shimo.im/docs/j9KwG8Xct6kDHjy6/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《路由vue-router》|Vue的三大核心之一：路由vue-router实现组件之间的跳转，在单页应用，依赖于路由的地址显示组件而不再依赖于后台|[链接](https://shimo.im/docs/6J89RvtJxvHD8qyt/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《状态管理vuex》|Vue的三大核心之一：Vuex状态管理它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化，可以监听非父子组件的状态变化。|[链接](https://shimo.im/docs/HCxPdy9qwVdTwXTG/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《Vue ToDo 最佳实践》|通过上面学习的基础知识来实践vue-todo的案例，同时还有一个游戏案例《八皇后》的实现更好的掌握Vue开发的逻辑能力|[链接](https://shimo.im/docs/ycvjR9GcY6PpKpkv/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
-|《Vue 3 实现ToDo》|使用最新的Vue3来实现vue-todo的案例，了解vue3的特性|[链接](https://shimo.im/docs/pkVGyqjJTwWRKVG9/)|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《UI构建》|了解Vue框架的整体设计思想:渐进式框架，掌握Vue最基础的使用：模板语法、事件绑定、计算属性、侦听器、条件渲染、双向绑定等VueCore核心基础|https://shimo.im/docs/JKhXXCkPtxpVtdCh/|相关代码[链接](https://github.com/JakePrim/VueAdvanced#)|
+|《组件开发》|Vue的三大核心之一：**组件**组件是必须要掌握的知识点：组件的定义、组件的传参、组件与父组件的传值等|https://shimo.im/docs/Yvhrd8VCQXGCvTWw/|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《动画》|Vue.js 对动画进行了封装可以更加方便的实现动画效果|https://shimo.im/docs/j9KwG8Xct6kDHjy6/|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《路由vue-router》|Vue的三大核心之一：路由vue-router实现组件之间的跳转，在单页应用，依赖于路由的地址显示组件而不再依赖于后台|https://shimo.im/docs/6J89RvtJxvHD8qyt/|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《状态管理vuex》|Vue的三大核心之一：Vuex状态管理它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化，可以监听非父子组件的状态变化。|https://shimo.im/docs/HCxPdy9qwVdTwXTG/|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《Vue实践案例》|通过上面学习的基础知识来实践vue-todo的案例，同时还有一个游戏案例《八皇后》的实现更好的掌握Vue开发的逻辑能力|https://shimo.im/docs/ycvjR9GcY6PpKpkv/|[代码](https://github.com/JakePrim/VueAdvanced#)|
+|《Vue 3 实现ToDo》|使用最新的Vue3来实现vue-todo的案例，了解vue3的特性|https://shimo.im/docs/pkVGyqjJTwWRKVG9/|[代码](https://github.com/JakePrim/VueAdvanced#)|
 
 
 
 ## 实战篇
 
-|项目|项目介绍|项目链接|代码地址|
+|项目|项目介绍|项目的链接地址|项目代码地址|
 |:----|:----|:----|:----|
-|美食网站|使用vue2.x来实现不是很复杂的普通的网站项目|    |    |
-|trello|使用vue2.x来实现来实现比较复杂的项目，通过node来实现后台|    |    |
-|音乐webAPP|使用vue2.x实现Webapp的项目，掌握vue开发移动端项目|    |    |
+|美食网站|使用vue2.x来实现不是很复杂的普通的网站项目| 项目地址 | 项目的代码地址 |
+|trello|使用vue2.x来实现来实现比较复杂的项目，通过node来实现后台 全栈实战项目|    |    |
+|webAPP|使用vue2.x实现Webapp的项目，掌握vue开发移动端项目|    |    |
 |企业级实战|企业级真实案例实战：使用 TypeScript 编程语言，基于 Vue.js 全家桶（Vue.js、Vue Router、Vuex、Element UI）开发 B 端管理系统项目（dashboard)。通过实战深入掌握 Vue.js 及其相关技术栈的使用|    |    |
 |Vue3实战项目|Vue3即将要发布，有必要快速掌握Vue3，毕竟号称Vue3比Vue2快好几倍呢|    |    |
 
 
 ## 源码篇
 
-|文章名称|文章简介|文章地址|代码地址|
+|文章名称|文章简介|文章链接地址|文章的代码地址|
 |:----|:----|:----|:----|
 |手写vue-router|首先回顾 Vue Router 的基本使用，以及 Hash 模式和 History 模式的区别，然后自己手写一个实现基 History 模式的前端路由，了解路由内部实现的原理；|    |    |
 |手写响应式实现|数据响应式实现原理分析，手动写一个简易版本的Vue|    |    |

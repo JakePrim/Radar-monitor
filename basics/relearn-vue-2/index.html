@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		
+		<div id="app2">
+			
+		</div>
+		<!-- 还可以使用如下作为模板 -->
+		<script type="text/template" id="template1">
+			<div id="app">
+				<h1>sdd</h1>
+			</div>
+		</script>
+		<script>
+			/**
+			 * el:挂载点
+			 * 
+			 * template：模板
+			 * 
+			 * render:渲染函数
+			 * 
+			 * 组件：对应用可复用的结构、样式、行为的封装
+			 * 
+			 * render() => vNode => DOM => 挂载到指定的位置
+			 * 直接使用render函数 性能比HTML要高，但是实际上，工作中还是写HTML要多一些
+			 * - HTML比render函数写起来要方便
+			 * - webpack => vue-loader => html => 编译成对应的render函数，实际生产环境使用的render函数
+			 */
+			let app = new Vue({
+				el:"#app",
+				// template:'',
+				render(h){
+					//渲染函数 返回一个vNode的对象
+					//vNode对象：虚拟节点 Vue会根据虚拟节点进行渲染得到真实的DOM节点
+					let vNode = h(
+						'div',
+						{
+							attrs:{
+								id:'app'
+							}
+						},
+						[
+							h(
+								'h1',
+								'render'
+							)
+						]
+					);
+					console.log(vNode);
+					return vNode
+				}
+			})
+			
+			
+			/**
+			 * template
+			 * template => ? => render() => vNode => DOM
+			 */
+			let app2 = new Vue({
+				el:"#app2",
+				// template:`
+				// 	<div id="app2">
+				// 		<h1>template</h1>
+				// 	</div>
+				// `,
+				template:"#template1"
+			})
+			//下面两个是等等价的
+			app2.$mount('#app');
+			app2.$mount(document.querySelector("#app"));
+		</script>
+		
+	</body>
+</html>
