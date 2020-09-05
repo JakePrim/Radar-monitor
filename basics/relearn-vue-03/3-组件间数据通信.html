@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件间的通信</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>可复用组件</h1>
+        <hr>
+        <!-- kkb-child假设是一个容器 -->
+        <kkb-child :val="p1" @change="handleChange">
+            容器里面的东西
+        </kkb-child>
+        <!-- <kkb-child :val="p1"></kkb-child> -->
+    </div>
+    <script>
+        /*组件的数据
+        * 1. 组件内部私有数据 - data
+        * 2. 组件外部传入数据 - props
+        * props:可以验证传入的参数
+        */
+        Vue.component('kkb-child',{
+            //props中的数据与data类似，都会代理到组件实例上
+            // props:['a','b'],//接受两个外部传入的参数 a 和 b
+            props:{
+                val:Number
+            },    
+            data(){
+                return {
+                    n : 1,
+                }
+            },
+            //shadow 被子的构造物
+            template:`
+                <div>
+                    <div @click="change1">kkb-{{n}}</div>
+                    <div @click="change2">{{val}}</div>
+                </div>
+            `,
+            methods:{
+                change1(){
+                    this.n++;
+                },
+                change2(){
+                    //不要直接修改props的属性
+                    //因为props传入的数据不仅仅只是被当前的组件使用，还可能被其他组件用
+                    //单项数据流
+                    // this.val++;
+
+                    //如果非要修改数据，需要把数据的请求通知给父级的持有人
+                    this.$emit('change',this.val+1);
+                }
+            }
+        });
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                obj:{
+                    n:1
+                },
+                p1:100
+            },
+            methods:{
+                handleChange(val){
+                    //p1的数据修改了 是响应式的会重新渲染组件 kkb-chaild 的参数就会改变
+                    this.p1=val
+                }
+            }
+        });
+
+        //组件为什么data会是个函数呢？
+        //看下面的例子
+        function component(name,options){
+            return class A{
+                constructor() {
+                    this._data = options.data();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

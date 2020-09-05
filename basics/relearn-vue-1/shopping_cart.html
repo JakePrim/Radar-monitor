@@ -123,12 +123,14 @@
 						}
 					},
 					totalNum(){
-						return this.list.reduce((prev,curr,index)=>{
+						let checkList = this.list.filter(item=>item.checked);
+						return checkList.reduce((prev,curr,index)=>{
 							return prev + curr.quantity
 						},0)
 					},
 					totalPrice(){
-						return this.list.reduce((pre,curr,index)=>{
+						let checkList = this.list.filter(item=>item.checked);
+						return checkList.reduce((pre,curr,index)=>{
 							let price = (curr.quantity * (curr.price/100)).toFixed(2)
 							return pre + Number.parseInt(price)
 						},0)

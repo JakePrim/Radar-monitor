@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双向绑定</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 ref="h1">可复用组件</h1>
+        <button @click="getChild">获取子组件内部的数据</button>
+        <hr>
+        <!-- ref自动收集 也可以在原生标签中使用-->
+        <!-- style样式组件会自动继承 -->
+        <kkb-child :val.sync="p1" ref="kkb" style="color:blue">
+            <template>
+                <p>我是组件包含的部分1:{{p1}}</p>
+            </template>
+            <!-- 组件和插槽之间的通信 -->
+            <template v-slot:orange="data">
+                <p>我是组件包含的部分2</p>
+                <p>这是kkb-child传入的数据:{{data}}</p>
+            </template>
+        </kkb-child>
+    </div>
+    <script>
+        /*
+        ref 类似ID
+        */
+        Vue.component('kkb-child',{
+            //即使使用了v-model也需要定义props
+            props:{
+                val:Number
+            },
+            inheritAttrs:false,//禁用属性 style class 不能禁用 有特殊的处理，其他的属性会被禁用掉
+            data(){
+                return {
+                    n : 1,
+                    m : 100,
+                }
+            },
+            //slot 插槽，会自动渲染组件包含的部分
+            template:`
+                <div style="border:10px solid red;padding:10px;">
+                    <div style="border:10px solid blue;padding:10px;">
+                        <slot></slot>
+                    </div>
+                    <div style="border:10px solid orange;padding:10px;" @click="change1">
+                        <slot name="orange" :n="n" :lm="m"></slot>
+                    </div>
+                </div>
+            `,
+            methods:{
+                change1(){
+                    this.n++;
+                },
+                change2(){
+                    this.$emit('update:val',this.val+1);
+                }
+            }
+        });
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                obj:{
+                    n:1
+                },
+                p1:100
+            },
+            methods:{
+                handleChange(val){
+                    //p1的数据修改了 是响应式的会重新渲染组件 kkb-chaild 的参数就会改变
+                    this.p1=val
+                },
+                getChild(){
+                    console.log(this.$refs);
+                    console.log(this.$refs.kkb);
+                    //调用子组件的方法
+                    this.$refs.kkb.change1();
+                }
+            }
+        });
+
+        //组件为什么data会是个函数呢？
+        //看下面的例子
+        function component(name,options){
+            return class A{
+                constructor() {
+                    this._data = options.data();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
