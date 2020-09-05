@@ -80,16 +80,6 @@
                 }
             }
         });
-
-        //组件为什么data会是个函数呢？
-        //看下面的例子
-        function component(name,options){
-            return class A{
-                constructor() {
-                    this._data = options.data();
-                }
-            }
-        }
     </script>
 </body>
 </html>

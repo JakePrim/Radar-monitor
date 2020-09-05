@@ -20,11 +20,6 @@
         <kkb-child :val.sync="p1"></kkb-child>
     </div>
     <script>
-        /*组件的数据
-        * 1. 组件内部私有数据 - data
-        * 2. 组件外部传入数据 - props
-        * props:可以验证传入的参数
-        */
         Vue.component('kkb-child',{
             //即使使用了v-model也需要定义props
             props:{

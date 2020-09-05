@@ -46,14 +46,6 @@
                 }
             }
         }
-
-        //创建组件
-        // let CA = component('',{
-        //     data:{
-        //         n:1
-        //     }
-        // });
-
         let CA = component('',{
             data:function(){
                 return {
@@ -61,6 +53,15 @@
                 }
             }
         });
+
+        //创建组件
+        let CA = component('',{
+            data:{
+                n:1
+            }
+        });
+
+        
 
         let c1 = new CA();
         let c2 = new CA();
