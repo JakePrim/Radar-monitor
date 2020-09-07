@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <kkb-c1></kkb-c1>
+        <!-- 不能使用 -->
+        <!-- <kkb-c2></kkb-c2> -->
+    </div>
+    <script>
+        Vue.component('kkb-c1',{
+            //只能在当前组件用
+            template:`<div>
+                kkb-c1
+                <kkb-c2></kkb-c2>
+            </div>`,
+            //注册子组件的局部组件
+            components:{
+                //只能在当前注册的组件内使用 不能在其他 父级 子级使用
+                'kkb-c2':{
+                    template:`<div>kkb-c2</div>`
+                }
+            }
+        });
+        new Vue({
+            el:"#app"
+        });
+    </script>
+</body>
+</html>

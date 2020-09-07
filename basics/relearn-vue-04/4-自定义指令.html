@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        .box{
+            position: absolute;
+            width:100px;
+            height: 100px;
+            background-color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="isDrag=!isDrag">点击</button>
+        <div class="box" v-drag.limit="isDrag"></div>
+    </div>
+    <script>
+        //定义指令，使用指令需要v-
+        Vue.directive('drag',{
+            bind(el){
+                console.log('bind','只调用一次 指令第一次绑定');
+            },
+            inserted(el,binding){
+                //只会执行一次
+                console.log(binding);
+                //注意值的使用
+                el.isCanDrag = binding.value;
+                let isDown = false;
+                let x = 0;
+                let y = 0;
+                el.addEventListener('mousedown',function(e){
+                    if (!el.isCanDrag) {
+                        return;
+                    }
+                    isDown = true;
+                    x = e.clientX - el.offsetLeft;
+                    y = e.clientY - el.offsetTop;
+                    
+                    e.preventDefault();
+                });
+                document.addEventListener('mousemove',function(e){
+                    if (isDown) {
+                        let l = e.clientX - x;
+                        let t = e.clientY - y;
+                        //修饰符的获取
+                    if (binding.modifiers.limit) {
+                        if (l < 0) {
+                            l = 0;
+                        }
+                    }
+                        el.style.left = l + "px";
+                        el.style.top = t + "px";
+                    }
+                });
+                document.addEventListener('mouseup',function(){
+                    isDown = false;
+                })
+            },
+            update(){
+
+            },
+            componentUpdate(el,binding){
+                el.isCanDrag = binding.value;
+            },
+            unbind(){
+
+            }
+        });
+        new Vue({
+            el:"#app",
+            data:{
+                isDrag:false
+            }
+        })
+    </script>
+</body>
+</html>
