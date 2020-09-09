@@ -13,7 +13,6 @@
         <kkb-c1 :v="a" v-if="a<5">
             <kkb-coomponent></kkb-coomponent>
         </kkb-c1>
-        
     </div>
     <script>
         /**
@@ -128,6 +127,10 @@
                 changeB(){
                     this.b++;
                     console.log('??',this.b,this.$refs.bEle.innerHTML);
+                    setTimeout(() => {
+                        console.log("另一层宏任务获取:");
+                        console.log('??',this.b,this.$refs.bEle.innerHTML);
+                    }, 0);
                     //数据发生改变以后，同时渲染完成以后再去调用
                     //针对单一事件更新数据后立即操作dom
                     this.$nextTick(()=>{

@@ -52,26 +52,30 @@
         // - 动态组件
         // - 组件根节点
         Vue.component('k-animate', {
-            props:['show'],
+            props: ['show'],
             template: `
-                <div>
-                    <transition name="slide-fade" >
+                    <transition name="slide-fade" @after-leave="afterLeave">
                         <div class="box"></div>
                     </transition>
-                </div>
             `,
-            beforeDestory(){
+            beforeDestory() {
+                //如果该组件有动画，那么beforeDestroy是不会等待组件的动画完成以后执行的
                 console.log('beforeDestory');
+            },
+            methods: {
+                afterLeave(el) {
+                    console.log('afterEnter', el);
+                }
             }
         })
 
         let app = new Vue({
             el: "#app",
-            data:{
-                isShow:true
+            data: {
+                isShow: true
             },
-            methods:{
-                animate(){
+            methods: {
+                animate() {
                     this.isShow = !this.isShow;
                 }
             },
