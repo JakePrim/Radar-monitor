@@ -14,8 +14,68 @@
         </keep-live>
     </div>
     <script>
+        const IndexBox = {
+            data(){
+                return {
+                    items:[
+                        '1111111111',
+                        '22222222',
+                        '33333333333'
+                    ]
+                }
+            },
+            template:`
+                <div>
+                    <ul>
+                        <li v-for="item of items">
+                            <input type="checkbox" />
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+            `,
+            created(){
+                console.log('IndexBox created');
+            },
+            destroyed(){
+                console.log("IndexBox destroyed");
+            }
+        }
+
+        const PostMail={
+            template:`<div>PostMail</div>`,
+            created(){
+                console.log('PostMail created');
+            },
+            destroyed(){
+                console.log('PostMail destroyed');
+            }
+        }
+
+        const Bin = {
+            template:`<div>Bin</div>`,
+            created(){
+                console.log('Bin created');
+            },
+            destroyed(){
+                console.log('Bin destroyed');
+            }
+        }
+
+        // Vue.component('',{})
         new Vue({
-            el:"#app"
+            el:"#app",
+            data:{
+                curComponent:"IndexBox"
+            },
+            components:{
+                IndexBox,
+                PostMail,
+                Bin
+            },
+            methods:{
+                
+            }
         })
     </script>
 </body>

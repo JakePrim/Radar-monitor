@@ -1,33 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <!-- 路径对应的组件会替换掉 -->
-    <router-view/>
+    <el-container>
+      <Header></Header>
+      <el-main>
+        <div class="main">
+          <!-- 路径对应的组件会替换在这个位置 -->
+          <router-view/>
+        </div>
+      </el-main>
+      <el-footer>
+        <div class="footer">
+          Copyright © 2019 - 2019 
+        </div>
+      </el-footer>
+    </el-container>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Header from '@/components/Header'
+export default {
+  //添加子组件
+  components:{
+    Header
   }
 }
+</script>
+
+<style lang="stylus">
+body
+  background #fae8c8
+  font-size 12px
+.main
+  width 990px
+  margin 0 auto
+.footer
+  text-align center
+  height 42px
+  line-height 42px
 </style>

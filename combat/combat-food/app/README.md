@@ -1,5 +1,15 @@
 # app
 
+Vue vue-router vuex vue-cli
+
+lodash mockjs
+
+请求库：axios
+
+后端服务:nodejs
+
+首页开发
+
 ## Project setup
 ```
 yarn install
