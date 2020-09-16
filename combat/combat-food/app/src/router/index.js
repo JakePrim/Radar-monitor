@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/home/Home.vue'
 //引入组件会在打包的时候 打包到一个文件中 如果所有的组件都打包到一个文件中，会导致文件很大
 
 
@@ -28,7 +28,7 @@ Vue.use(VueRouter)
     path: '*',// 没有匹配到路径 重定向到home组件
     name: 'noFound',
     title: '未找到',
-    redirect: {
+    redirect: {//重定向设置
       name: 'home'
     }
   }
