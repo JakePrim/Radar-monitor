@@ -10,14 +10,14 @@
       </el-main>
       <el-footer>
         <div class="footer">
-          Copyright © 2019 - 2019 
+          Copyright © 2019 - 2020
         </div>
       </el-footer>
     </el-container>
   </div>
 </template>
 <script>
-import Header from '@/components/Header'
+import Header from '@/components/header'
 export default {
   //添加子组件
   components:{

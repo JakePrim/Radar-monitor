@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
+
+import '@/assets/css/index.styl'
+import '@/assets/css/over-write.styl'
+
 //引入组件会在打包的时候 打包到一个文件中 如果所有的组件都打包到一个文件中，会导致文件很大
 
 
