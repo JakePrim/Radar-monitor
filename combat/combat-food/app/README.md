@@ -8,7 +8,6 @@ lodash mockjs
 
 后端服务:nodejs
 
-首页开发
 
 ## Project setup
 ```
