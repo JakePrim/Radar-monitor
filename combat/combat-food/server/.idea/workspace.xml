@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95f3586a-8673-4b4c-ab22-1b17e5b378d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../basics/vue3/app" beforeDir="false" afterPath="$PROJECT_DIR$/../../../basics/vue3/app" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/views/home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_19390.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_57480.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_84293.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_9129.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_93343.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_19392.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_57483.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_84294.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_9130.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_93344.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +32,19 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -40,7 +55,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600182917920</updated>
-      <workItem from="1600182918954" duration="308000" />
+      <workItem from="1600182918954" duration="2275000" />
+      <workItem from="1600318424742" duration="1999000" />
     </task>
     <servers />
   </component>
