@@ -51,8 +51,8 @@ export default {
     }).then(res => {
       console.log(res);
       this.menuList = res.data.list;
+      //计算总共有多少页
       this.pages = Math.ceil(res.data.total / res.data.page_size);
-      this.pages=3
     }).catch(error => {
       console.log(error);
     })

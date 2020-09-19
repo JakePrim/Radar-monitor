@@ -2,16 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
 
-import '@/assets/css/index.styl'
-import '@/assets/css/over-write.styl'
-
-//引入组件会在打包的时候 打包到一个文件中 如果所有的组件都打包到一个文件中，会导致文件很大
-
 
 Vue.use(VueRouter)
-//import 按需加载 只有在使用的时候才会加载
-//webpackChunkName 相同名称下 可以将多个组件合并成一个文件
-//按需加载 ()=>import(../component) 如果所有都用import的话所有组件都会打包一个文件中，导致文件很大
+
+const MenuList = () => import(/* webpackChunkName: "space" */ '@/views/user/menu-list');
+const Space = () => import(/* webpackChunkName: "space" */ '@/views/user/space');
+const Funs = () => import(/* webpackChunkName: "space" */ '@/views/user/fans');
 
 const routes = [
     //Home 打包到一个文件中 其他组件按需加载
@@ -24,7 +20,7 @@ const routes = [
         path: '/login',
         name: 'login',
         title: '登录页',
-        component: () => import('@/views/login/index'),
+        component: () => import(/* webpackChunkName: "login" */ '@/views/login/index'),
         meta: {//是否登录标记
             login: true,
         }
@@ -33,34 +29,25 @@ const routes = [
         path: '/detail',
         name: 'detail',
         title: '菜谱详情',
-        component: () => import('@/views/detail/Detail')
+        component: () => import(/* webpackChunkName: "detail" */ '@/views/detail/Detail')
     },
     {
         path: '/space',
         title: '个人空间',
         name: 'space',
-        component: () => import('@/views/user/space'),
+        component: Space,
         redirect: {
-            name:'works'//该组件下有多个组件 默认显示的组件名
+            name: 'works'//该组件下有多个组件 默认显示的组件名
         },
         meta: {//用来标记需要登录
             login: true,
         },
-        children:[
+        children: [
             {
-                path:'works',
-                name:'works',
-                title:'作品',
-                component:()=>import('@/views/user/menu-list'),
-                meta:{
-                    login:true
-                }
-            },
-            {
-                path: 'fans',
-                name: 'fans',
-                title: '粉丝',
-                component:()=>import('@/views/user/fans'),
+                path: 'works',
+                name: 'works',
+                title: '作品',
+                component: MenuList,
                 meta: {
                     login: true
                 }
@@ -69,10 +56,25 @@ const routes = [
                 path: 'fans',
                 name: 'fans',
                 title: '粉丝',
-                component:()=>import('@/views/user/fans'),
+                component: Funs,
                 meta: {
                     login: true
                 }
+            },
+            {
+                path: 'following',
+                name: 'following',
+                title: '关注',
+                component: Funs,
+                meta: {
+                    login: true
+                }
+            },
+            {
+                path: 'collection',
+                name: 'collection',
+                title: '收藏',
+                component: MenuList
             }
         ]
     },
@@ -99,6 +101,31 @@ const router = new VueRouter({
     mode: 'history',// hash: #home    history: /home
     base: process.env.BASE_URL,
     routes
+})
+
+router.beforeEach((to, form, next) => {
+    //to目标路由
+    console.log('??to:', to);
+    const isLogin = false;//标记用户是否登录
+    if (to.matched.some(item => item.meta.login)) {
+        //只要有一个需要登录就需要登录
+        if (isLogin) {
+            next();
+            return;
+        }
+        //没有登录，进入login直接进入
+        if (!isLogin && to.name === 'login') {
+            next();
+        } else {
+            //没有登录，进入的不是login 跳转到login
+            next({name: 'login'});
+        }
+    } else {
+        //如果要进入路由必须调用next
+        next();
+    }
+
+
 })
 
 export default router
