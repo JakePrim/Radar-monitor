@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
 import {userInfo} from '@/service/request'
 import Store from "@/store";
+
 Vue.use(VueRouter)
 
 const MenuList = () => import(/* webpackChunkName: "space" */ '@/views/user/menu-list');
@@ -103,6 +104,13 @@ const router = new VueRouter({
     routes
 })
 
+/**
+ * 清空token方法
+ */
+function extracted() {
+    localStorage.removeItem('token');
+}
+
 router.beforeEach(async (to, form, next) => {
     //to目标路由
     const token = localStorage.getItem('token');
@@ -110,17 +118,27 @@ router.beforeEach(async (to, form, next) => {
     //不管路由需不需要登录 都需要向后端发送请求 拿到用户信息 判断token是否正确合法
     const data = await userInfo();
     //设置数据
-    Store.commit('changeUserInfo',data.data);
+    Store.commit('changeUserInfo', data.data);
     const isLogin = !!token;//标记用户是否登录
+    console.log(isLogin, data)
+
+
     if (to.matched.some(item => item.meta.login)) {
         //只要有一个需要登录就需要登录
         if (isLogin) {//如果已经标记了用户登录的状态
             //如果token不合法 后台会返回400 这时候跳转到登录页面 并清空token
             if (data.error === 400) {
                 //后端告诉你 登录没成功
-                next({name:'login'})
+                next({name: 'login'})
                 //清空token
-                localStorage.removeItem('token');
+                extracted();
+                return;
+            } else if (data.code !== 0) {
+                //表示网络错误 或者根据token请求的用户不存在
+                //跳转到登录页
+                next({name: 'login'});
+                //清空token
+                extracted();
                 return;
             }
             //如果用户已经登录了 并且请求login页那么直接跳转到首页
