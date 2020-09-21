@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
-
-
+import {userInfo} from '@/service/request'
+import Store from "@/store";
 Vue.use(VueRouter)
 
 const MenuList = () => import(/* webpackChunkName: "space" */ '@/views/user/menu-list');
@@ -103,14 +103,32 @@ const router = new VueRouter({
     routes
 })
 
-router.beforeEach((to, form, next) => {
+router.beforeEach(async (to, form, next) => {
     //to目标路由
-    console.log('??to:', to);
-    const isLogin = false;//标记用户是否登录
+    const token = localStorage.getItem('token');
+    //每一次进入路由的时候都要向后端发送token 验证是否合法 防止用户自己输入token导致 错误
+    //不管路由需不需要登录 都需要向后端发送请求 拿到用户信息 判断token是否正确合法
+    const data = await userInfo();
+    //设置数据
+    Store.commit('changeUserInfo',data.data);
+    const isLogin = !!token;//标记用户是否登录
     if (to.matched.some(item => item.meta.login)) {
         //只要有一个需要登录就需要登录
-        if (isLogin) {
-            next();
+        if (isLogin) {//如果已经标记了用户登录的状态
+            //如果token不合法 后台会返回400 这时候跳转到登录页面 并清空token
+            if (data.error === 400) {
+                //后端告诉你 登录没成功
+                next({name:'login'})
+                //清空token
+                localStorage.removeItem('token');
+                return;
+            }
+            //如果用户已经登录了 并且请求login页那么直接跳转到首页
+            if (to.name === 'login') {
+                next({name: 'home'})
+            } else {
+                next();
+            }
             return;
         }
         //没有登录，进入login直接进入
@@ -124,8 +142,6 @@ router.beforeEach((to, form, next) => {
         //如果要进入路由必须调用next
         next();
     }
-
-
-})
+});
 
 export default router

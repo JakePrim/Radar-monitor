@@ -41,15 +41,26 @@ export default {
   methods: {
     submitForm(ruleForm) {
       console.log(ruleForm);
-      this.$refs[ruleForm].validate((valid) => {
+      //注意这里要加async
+      this.$refs[ruleForm].validate(async (valid) => {
         if (valid) {
-          //请求接口
-          login(this.ruleForm).then(res => {
+          //请求接口 进行登录
+          login({
+            name: this.ruleForm.name,
+            password: this.ruleForm.password
+          }).then(res => {
             console.log(res);
-          })
-
-          //登录成功跳转到home页面
-          // this.$router.push('home');
+            if (res.code === 0) {
+              //存储token
+              localStorage.setItem('token',res.data.token);
+              //登录成功跳转到home页面
+              this.$router.push('home');
+            }else{
+              this.$message.error(res.mes);
+            }
+          }).catch(error => {
+            this.$message.error(error);
+          });
         } else {
           this.$message.error('用户名或密码错误');
           return false;
