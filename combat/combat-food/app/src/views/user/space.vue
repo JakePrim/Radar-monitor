@@ -10,7 +10,7 @@
         <span class="info">
           <em>{{ userInfo.createdAt }}加入美食杰</em>
           |
-          <router-link to="">编辑个人资料</router-link>
+          <router-link :to="{name:'edit'}" v-if="isOwner">编辑个人资料</router-link>
         </span>
         <div class="tools">
           <!-- follow-at no-follow-at -->
@@ -97,7 +97,8 @@ export default {
       userInfo: {},
       activeName: 'works',
       isOwner: false,
-      infos:[]
+      infos:[],
+      queen:{}
     }
   },
   watch: {
@@ -148,10 +149,22 @@ export default {
       const data = await activeTab[this.activeName]({
         "userId": this.userInfo.userId
       });
+      console.log(data)
       //判断返回数据的标记是否和当前的tab相同
       if (this.activeName === data.flag){
-        this.infos = data.data.list;
+        this.infos = data.list;
       }
+
+      //另外一种方案 通过闭包的方式来存储 数据队列
+      // (async (activeName)=>{
+      //   const data = await activeTab[activeName]({
+      //     "userId": this.userInfo.userId
+      //   });
+      //   this.queen[activeName] = data.data.list;
+      //   if (activeName === this.activeName){
+      //     this.infos = this.queen[activeName];
+      //   }
+      // })(this.activeName);
     }
   }
 }

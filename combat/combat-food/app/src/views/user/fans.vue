@@ -3,7 +3,7 @@
     <div class="info-empty" v-if="!info.length">
       <div>
         <p v-if="activeName==='fans'">还没有被关注哦，多发布菜谱，更容易被找到</p>
-        <p v-if="activeName==='follwoing'">还没有关注别人哦，可以预览菜谱，找到别人</p>
+        <p v-if="activeName==='following'">还没有关注别人哦，可以预览菜谱，找到别人</p>
       </div>
     </div>
     <ul class="fans clearfix">

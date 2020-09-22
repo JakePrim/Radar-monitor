@@ -33,6 +33,15 @@ const routes = [
         component: () => import(/* webpackChunkName: "detail" */ '@/views/detail/Detail')
     },
     {
+        path: '/edit',
+        name: 'edit',
+        title: '编辑个人资料',
+        component: () => import('@/views/user/edit'),
+        meta: {
+            login: true
+        }
+    },
+    {
         path: '/space',
         title: '个人空间',
         name: 'space',

@@ -21,7 +21,10 @@ export default {
   name: "menu-list",
   components: {MenuItem},
   props: {
-    info: [],
+    info: {
+      type:Array,
+      default:()=>[]
+    },
     activeName:{
       type:String
     },
