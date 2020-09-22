@@ -3,19 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="95f3586a-8673-4b4c-ab22-1b17e5b378d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../../basics/vue3/app" beforeDir="false" afterPath="$PROJECT_DIR$/../../../basics/vue3/app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/components/header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/components/header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/views/home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/views/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/login/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/views/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/login/register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/views/user/space.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/views/user/space.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/agent_timing_19390.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/agent_timing_57480.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/agent_timing_84293.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/agent_timing_9129.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/agent_timing_93343.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/application_timing_19392.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/application_timing_57483.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/application_timing_84294.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/application_timing_9130.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/application_timing_93344.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_24876.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/agent_timing_32697.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_24877.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/application_timing_32702.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +54,8 @@
       <option name="presentableId" value="Default" />
       <updated>1600182917920</updated>
       <workItem from="1600182918954" duration="2275000" />
-      <workItem from="1600318424742" duration="1999000" />
+      <workItem from="1600318424742" duration="6106000" />
+      <workItem from="1600656082956" duration="13000" />
     </task>
     <servers />
   </component>
