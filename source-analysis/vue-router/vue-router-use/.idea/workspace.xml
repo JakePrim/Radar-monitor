@@ -2,25 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad2aba91-24b1-4156-93d7-05af7f3b125d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/components/header/m-header.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/views/Blog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/views/Photo.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/Layout.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/views/Detail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../basics/vue3/app" beforeDir="false" afterPath="$PROJECT_DIR$/../../../basics/vue3/app" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/src/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/src/controllers/TestController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-trello/combat-trello-server/src/controllers/TestController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/components/header/m-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/components/header/m-header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../combat/combat-webapp/music-app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/views/Photo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/views/Photo.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,8 +58,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -77,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601109882330</updated>
-      <workItem from="1601109884062" duration="180000" />
+      <workItem from="1601109884062" duration="3861000" />
     </task>
     <servers />
   </component>
@@ -85,9 +97,33 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="563" y="330" key="#ESLint" timestamp="1601123697807">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="563" y="330" key="#ESLint/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601123697807" />
     <state x="180" y="105" width="1079" height="719" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601110063599">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="180" y="105" width="1079" height="719" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601110063599" />
+    <state width="1388" height="232" key="GridCell.Tab.0.bottom" timestamp="1601127396955">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="232" key="GridCell.Tab.0.bottom/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601127396955" />
+    <state width="1388" height="232" key="GridCell.Tab.0.center" timestamp="1601127396953">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="232" key="GridCell.Tab.0.center/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601127396953" />
+    <state width="1388" height="232" key="GridCell.Tab.0.left" timestamp="1601127396952">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="232" key="GridCell.Tab.0.left/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601127396952" />
+    <state width="1388" height="232" key="GridCell.Tab.0.right" timestamp="1601127396954">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="232" key="GridCell.Tab.0.right/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601127396954" />
+    <state x="301" y="0" width="838" height="1032" key="search.everywhere.popup" timestamp="1601125621955">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="301" y="0" width="838" height="1032" key="search.everywhere.popup/0.0.1440.900/1440.-109.1920.1080@0.0.1440.900" timestamp="1601125621955" />
   </component>
 </project>

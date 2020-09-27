@@ -1,10 +1,12 @@
 <template>
-  这是相册页面
+  <div>
+    这是相册页面
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Photo"
+  name: 'Photo'
 }
 </script>
 

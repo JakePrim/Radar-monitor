@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-view></router-view>
+      <!-- 创建路由连接 -->
+      <router-link to="/">Index</router-link>
+      <router-link to="/blog">Blog</router-link>
+      <router-link to="/photo">Photo</router-link>
+      <router-link to="/detail/12">Detail</router-link>
     </div>
+    <!-- 路由组件占位 -->
     <router-view/>
   </div>
 </template>
