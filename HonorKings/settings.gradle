@@ -1,0 +1,3 @@
+include ':base_lib'
+include ':app'
+rootProject.name = "HonorKings"
