@@ -1,0 +1,5 @@
+include ':summer_common'
+include ':summer_ui'
+include ':summer_lib'
+include ':app'
+rootProject.name = "HonorKings"
