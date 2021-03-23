@@ -10,9 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HonorKings">
-        <activity android:name="com.prim.honorkings.demo.tab.TabBottomActivity" />
-        <activity android:name="com.prim.honorkings.demo.log.LogActivity" />
-        <activity android:name=".MainActivity">
+<!--        <activity android:name=".demo.tab.TabTopActivity"></activity>-->
+        <activity android:name=".demo.tab.TabBottomActivity" />
+        <activity android:name=".demo.log.LogActivity" />
+        <activity android:name=".demo.tab.TabTopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

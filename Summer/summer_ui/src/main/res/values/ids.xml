@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_nav_left_back_view" type="id" />
+
+
+    <item name="id_search_icon" type="id" />
+    <item name="id_search_hint_view" type="id" />
+    <item name="id_search_edit_view" type="id" />
+    <item name="id_search_clear_icon" type="id" />
+    <item name="id_search_keyword_text_view" type="id" />
+    <item name="id_search_keyword_clear_icon" type="id" />
+</resources>

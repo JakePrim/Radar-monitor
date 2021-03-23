@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">hi-ui</string>
+    <string name="if_close">&#xe611;></string>
+    <string name="city_selector_tab_hint">请选择</string>
+    <string name="footer_loading_text">正在加载...</string>
+    <string name="list_empty">&#xe60c;</string>
+    <string name="list_empty_desc">小朋友,你是否有很多问号？</string>
+    <string name="list_empty_action">刷新一把</string>
+    <!--    蓝色提示小图标-->
+    <string name="if_detail">&#xeb93;</string>
+
+</resources>

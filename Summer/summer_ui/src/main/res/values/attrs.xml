@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HiBanner">
+        <attr name="autoPlay" format="boolean" />
+        <attr name="loop" format="boolean" />
+        <attr name="intervalTime" format="integer|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="HiSliderView">
+        <attr name="menuItemWidth" format="dimension" />
+        <attr name="menuItemHeight" format="dimension" />
+        <attr name="menuItemTextSize" format="dimension" />
+        <attr name="menuItemSelectTextSize" format="dimension" />
+        <attr name="menuItemIndicator" format="reference" />
+        <attr name="menuItemTextColor" format="reference" />
+        <attr name="menuItemBackgroundColor" format="color" />
+        <attr name="menuItemSelectBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HiNavigationBar">
+        <attr name="text_btn_text_size" format="dimension" />
+        <attr name="text_btn_text_color" format="color" />
+
+        <attr name="title_text_size" format="dimension" />
+        <attr name="title_text_size_with_subTitle" format="dimension" />
+        <attr name="title_text_color" format="color" />
+
+        <attr name="subTitle_text_size" format="dimension" />
+        <attr name="subTitle_text_color" format="color" />
+
+        <attr name="nav_icon_size" format="dimension" />
+        <attr name="nav_icon_color" format="color"></attr>
+        <attr name="nav_icon" format="string" />
+        <attr name="nav_title" format="string" />
+        <attr name="nav_subtitle" format="string" />
+
+        <attr name="hor_padding" format="dimension" />
+        <attr name="nav_line_color" format="color" />
+        <attr name="nav_line_height" format="dimension" />
+    </declare-styleable>
+
+    <attr name="hiNavigationStyle" format="reference" />
+
+    <style name="navigationStyle">
+        <item name="nav_icon_size">20sp</item>
+        <item name="nav_icon_color">@color/color_000</item>
+        <item name="hor_padding">8dp</item>
+
+        <item name="nav_line_color">@color/color_white</item>
+        <item name="nav_line_height">2px</item>
+
+        <!--       iconfont 字体资源-->
+        <item name="nav_icon">&#xe615;</item>
+        <item name="text_btn_text_size">16sp</item>
+        <item name="text_btn_text_color">@color/color_333</item>
+        <item name="title_text_size">18sp</item>
+        <item name="title_text_color">@color/color_000</item>
+        <item name="subTitle_text_size">@dimen/font_14</item>
+        <item name="title_text_size_with_subTitle">16sp</item>
+        <item name="subTitle_text_color">@color/color_000</item>
+    </style>
+
+
+    <declare-styleable name="HiSearchView">
+        <attr name="search_background" format="reference" />
+        <attr name="search_icon" format="string|reference" />
+        <attr name="search_icon_size" format="dimension" />
+        <attr name="icon_padding" format="dimension" />
+
+        <attr name="clear_icon" format="string" />
+        <attr name="clear_icon_size" format="dimension" />
+
+        <attr name="hint_text" format="string" />
+        <attr name="hint_text_size" format="dimension" />
+        <attr name="hint_text_color" format="color" />
+        <attr name="hint_gravity" format="enum">
+            <enum name="hint_center" value="0" />
+            <enum name="hint_left" value="1" />
+        </attr>
+
+        <attr name="search_text_size" format="dimension" />
+        <attr name="search_text_color" format="color" />
+
+
+        <attr name="key_word_size" format="dimension" />
+        <attr name="key_word_color" format="color" />
+        <attr name="key_word_background" format="reference" />
+        <attr name="key_word_icon" format="string" />
+        <attr name="key_word_max_length" format="integer" />
+        <attr name="key_word_padding" format="dimension" />
+    </declare-styleable>
+
+    <attr name="hiSearchViewStyle" format="reference" />
+
+    <style name="searchViewStyle">
+        <item name="search_background">@drawable/shape_search_view</item>
+        <item name="icon_padding">10dp</item>
+        <item name="search_icon">&#xe987;</item>
+        <item name="search_icon_size">16sp</item>
+        <item name="clear_icon">&#xe60b;</item>
+        <item name="clear_icon_size">16sp</item>
+        <item name="hint_text_color">#888888</item>
+        <item name="hint_text_size">16sp</item>
+        <item name="hint_gravity">hint_left</item>
+
+        <item name="search_text_size">16sp</item>
+        <item name="search_text_color">#000000</item>
+
+        <item name="key_word_icon">&#xe611;</item>
+        <item name="key_word_color">#ffffff</item>
+        <item name="key_word_background">@drawable/shape_key_word</item>
+        <item name="key_word_size">14sp</item>
+        <item name="key_word_max_length">10</item>
+        <item name="key_word_padding">4dp</item>
+    </style>
+
+
+    <style name="AmountStyle">
+        <item name="btn_text_size">@dimen/font_14</item>
+        <item name="btn_color">#999999</item>
+        <item name="btn_size">25dp</item>
+        <item name="btn_background">#eeeeee</item>
+        <item name="btn_margin">5dp</item>
+
+        <item name="amount_text_size">16sp</item>
+        <item name="amount_color">#000000</item>
+        <item name="amount_size">@dimen/dp_30</item>
+        <item name="amount_background">@android:color/white</item>
+
+        <item name="value">1</item>
+        <item name="min_value">1</item>
+        <!--        <item name="max_value">1</item> //不配置，就是Int.max_value-->
+    </style>
+
+    <declare-styleable name="AmountView">
+        <attr name="btn_text_size" format="dimension" />
+        <attr name="btn_color" format="color" />
+        <attr name="btn_size" format="dimension" />
+        <attr name="btn_margin" format="dimension" />
+        <attr name="btn_background" format="color" />
+
+        <attr name="amount_text_size" format="dimension" />
+        <attr name="amount_color" format="color" />
+        <attr name="amount_size" format="dimension" />
+        <attr name="amount_background" format="color" />
+
+        <attr name="value" format="integer" />
+        <attr name="max_value" format="integer" />
+        <attr name="min_value" format="integer" />
+    </declare-styleable>
+
+
+    <!--    <org.devio.as.proj.common.ui.view.InputItemLayout
+          app:hint="请输入手机号"
+          app:inputType="text|number|password"
+          app:title="用户名"
+          app:inputTextAppearance="@style/inputTextAppearance"
+          app:titleTextAppearance="@style/titleTextAppearance"
+          app:topLineAppearance="@style/lineAppearance"
+          app:bottomLineAppearance="@style/full_width_lineAppearance"
+      >-->
+    <declare-styleable name="InputItemLayout">
+        <attr name="hint" format="string" />
+        <attr name="title" format="string" />
+        <attr name="inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="password" value="1" />
+            <enum name="number" value="2" />
+        </attr>
+        <attr name="inputTextAppearance" format="reference" />
+        <attr name="titleTextAppearance" format="reference" />
+        <attr name="topLineAppearance" format="reference" />
+        <attr name="bottomLineAppearance" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="inputTextAppearance">
+        <attr name="hintColor" format="color" />
+        <attr name="inputColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="maxInputLength" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="titleTextAppearance">
+        <attr name="titleColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+        <attr name="minWidth" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="lineAppearance">
+        <attr name="color" format="color" />
+        <attr name="height" format="dimension" />
+        <attr name="leftMargin" format="dimension" />
+        <attr name="rightMargin" format="dimension" />
+        <attr name="enable" format="boolean" />
+    </declare-styleable>
+</resources>

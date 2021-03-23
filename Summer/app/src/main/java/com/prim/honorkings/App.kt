@@ -33,6 +33,12 @@ class App : SummerBaseApplication() {
             override fun enable(): Boolean {
                 return true
             }
+
+            override fun stackTraceDepth(): Int {
+                return 5
+            }
+
+
         }, ConsolePrinter())
     }
 }
