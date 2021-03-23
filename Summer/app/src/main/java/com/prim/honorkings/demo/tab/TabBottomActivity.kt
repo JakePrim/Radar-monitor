@@ -1,4 +1,4 @@
-package com.prim.honorkings.tab
+package com.prim.honorkings.demo.tab
 
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -80,7 +80,7 @@ class TabBottomActivity : AppCompatActivity() {
         }
 
         tabBottomLayout.defaultSelected(homeInfo)
-        //改变某个tab的高度
+        //改变某个tab的高度 获取某个TAB
         val tabBottom = tabBottomLayout.findTab(bottomInfoList[2])
         //改变高度
         tabBottom?.apply { resetHeight(DisplayUtils.dp2px(66f, resources)) }

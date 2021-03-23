@@ -1,16 +1,10 @@
-> Honor-of-Kings(王者荣耀)：最佳项目实战，APP架构设计，王者归来。
+> Summer: It's faster, easier, and safer to program Android apps. An Android infrastructure that focuses more on speed, simplicity and productivity(Summer: 可以更快，更轻松，更安全地进行Android 应用编程。更注重速度，简单性和生产率的Android基础框架)
 
-移动端架构师需要掌握的技术栈：
+不断更新中…..
 
-· 上层业务代码全面使用Kotlin提效
+构建Android应用开发基础套件：
 
-· Jetpack核心组件和Hilt深度应用
-
-· Flutter和RN的选型及落地
-
-· 项目采用组件化工程结构
-
-· 完整开发发布流程，囊括权限治理、渠道包构建、持续集成、自动打包、发布通知等
-
-· 严苛上线标准，囊括Code Review、Crash监控、APK安全等
+1. summer_lib: 底层支撑框架
+2. summer_common: 通用层框架，包括了BaseActivity的封装等逻辑
+3. summer_ui: 通用的UI框架，包括了各种UI组件
 

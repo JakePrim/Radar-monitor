@@ -1,4 +1,4 @@
-package com.prim.honorkings.log
+package com.prim.honorkings.demo.log
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,6 @@ import com.prim.base_lib.log.LogConfig
 import com.prim.base_lib.log.LogManager
 import com.prim.base_lib.log.LogType
 import com.prim.base_lib.log.PLog
-import com.prim.base_lib.log.printer.LogPrinter
 import com.prim.base_lib.log.printer.ViewPrinter
 import com.prim.honorkings.R
 
