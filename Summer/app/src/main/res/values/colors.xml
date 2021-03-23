@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- tab bottom -->
+    <color name="tabBottomDefault">#ff656667</color>
+    <color name="tabBottomTint">#ffd55949</color>
 </resources>

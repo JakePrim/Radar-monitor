@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import com.prim.base_lib.utils.DisplayUtils
 import com.prim.honorkings.R
+import com.prim.summer_common.tab.SummerFragmentTabView
+import com.prim.summer_common.ui.component.SummerBaseActivity
 import com.prim.summer_ui.tab.bottom.SummerTabBottomLayout
 import com.prim.summer_ui.tab.bottom.TabBottomInfo
 
-class TabBottomActivity : AppCompatActivity() {
+class TabBottomActivity : SummerBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_bottom)
@@ -53,17 +55,15 @@ class TabBottomActivity : AppCompatActivity() {
         )
         val profileInfo = TabBottomInfo(
             "设置",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_profile),
-            null,
+            decodeResource,
+            decodeResource,
             "#ff656667",
             "#ffd44949"
         )
         val meInfo = TabBottomInfo(
             "我的",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_profile),
-            null,
+            R.drawable.fire,
+            R.drawable.fire,
             "#ff656667",
             "#ffd44949"
         )

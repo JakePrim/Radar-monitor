@@ -3,8 +3,10 @@ package com.prim.summer_ui.tab.bottom;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -63,47 +65,77 @@ public class SummerTabBottom extends RelativeLayout implements ITab<TabBottomInf
      * @param init
      */
     private void inflateInfo(boolean selected, boolean init) {
-        if (tabInfo.tabType == TabBottomInfo.TabType.ICON) {
-            if (init) {
-                tabImage.setVisibility(GONE);
-                tabIcon.setVisibility(VISIBLE);
-                //设置字体
-                Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), tabInfo.iconFont);
-                tabIcon.setTypeface(typeface);
-                if (!TextUtils.isEmpty(tabInfo.name)) {
-                    tabName.setText(tabInfo.name);
-                }
-            }
-            //选中了当前的tab
-            if (selected) {
-                tabIcon.setText(TextUtils.isEmpty(tabInfo.selectedIconName) ? tabInfo.defaultIconName : tabInfo.selectedIconName);
-                tabName.setTextColor(getTextColor(tabInfo.tintColor));
-                tabIcon.setTextColor(getTextColor(tabInfo.tintColor));
-            } else {
-                tabIcon.setText(tabInfo.defaultIconName);
-                tabName.setTextColor(getTextColor(tabInfo.defaultColor));
-                tabIcon.setTextColor(getTextColor(tabInfo.defaultColor));
-            }
+        if (tabInfo.tabType == TabBottomInfo.TabType.FONT_ICON) {
+            fontIconType(selected, init);
         } else if (tabInfo.tabType == TabBottomInfo.TabType.BITMAP) {
-            if (init) {
-                tabImage.setVisibility(VISIBLE);
-                tabIcon.setVisibility(GONE);
-                if (!TextUtils.isEmpty(tabInfo.name)) {
-                    tabName.setText(tabInfo.name);
-                }
-            }
-            if (selected) {
-                tabImage.setImageBitmap(tabInfo.selectedBitmap);
-                if (tabInfo.defaultColor != null) {
-                    tabName.setTextColor(getTextColor(tabInfo.defaultColor));
-                }
-            } else {
-                tabImage.setImageBitmap(tabInfo.defaultBitmap);
-                if (tabInfo.tintColor != null) {
-                    tabName.setTextColor(getTextColor(tabInfo.tintColor));
-                }
-            }
+            bitmapType(selected, init);
+        } else if (tabInfo.tabType == TabBottomInfo.TabType.ICON) {
+            iconType(selected, init);
+        }
+    }
 
+    private void iconType(boolean selected, boolean init) {
+        if (init) {
+            tabImage.setVisibility(VISIBLE);
+            tabIcon.setVisibility(GONE);
+            if (!TextUtils.isEmpty(tabInfo.name)) {
+                tabName.setText(tabInfo.name);
+            }
+        }
+        if (selected) {
+            tabImage.setImageResource(tabInfo.selectedIcon);
+            if (tabInfo.tintColor != null) {
+                tabName.setTextColor(getTextColor(tabInfo.tintColor));
+            }
+        } else {
+            tabImage.setImageResource(tabInfo.defaultIcon);
+            if (tabInfo.defaultColor != null) {
+                tabName.setTextColor(getTextColor(tabInfo.defaultColor));
+            }
+        }
+    }
+
+    private void bitmapType(boolean selected, boolean init) {
+        if (init) {
+            tabImage.setVisibility(VISIBLE);
+            tabIcon.setVisibility(GONE);
+            if (!TextUtils.isEmpty(tabInfo.name)) {
+                tabName.setText(tabInfo.name);
+            }
+        }
+        if (selected) {
+            tabImage.setImageBitmap(tabInfo.selectedBitmap);
+            if (tabInfo.tintColor != null) {
+                tabName.setTextColor(getTextColor(tabInfo.tintColor));
+            }
+        } else {
+            tabImage.setImageBitmap(tabInfo.defaultBitmap);
+            if (tabInfo.defaultColor != null) {
+                tabName.setTextColor(getTextColor(tabInfo.defaultColor));
+            }
+        }
+    }
+
+    private void fontIconType(boolean selected, boolean init) {
+        if (init) {
+            tabImage.setVisibility(GONE);
+            tabIcon.setVisibility(VISIBLE);
+            //设置字体
+            Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), tabInfo.iconFont);
+            tabIcon.setTypeface(typeface);
+            if (!TextUtils.isEmpty(tabInfo.name)) {
+                tabName.setText(tabInfo.name);
+            }
+        }
+        //选中了当前的tab
+        if (selected) {
+            tabIcon.setText(TextUtils.isEmpty(tabInfo.selectedIconName) ? tabInfo.defaultIconName : tabInfo.selectedIconName);
+            tabName.setTextColor(getTextColor(tabInfo.tintColor));
+            tabIcon.setTextColor(getTextColor(tabInfo.tintColor));
+        } else {
+            tabIcon.setText(tabInfo.defaultIconName);
+            tabName.setTextColor(getTextColor(tabInfo.defaultColor));
+            tabIcon.setTextColor(getTextColor(tabInfo.defaultColor));
         }
     }
 

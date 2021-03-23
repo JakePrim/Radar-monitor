@@ -1,6 +1,8 @@
 package com.prim.summer_ui.tab.bottom;
 
 import android.graphics.Bitmap;
+
+import androidx.annotation.DrawableRes;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -12,8 +14,14 @@ import androidx.fragment.app.Fragment;
  * @name HonorKings
  */
 public class TabBottomInfo<Color> {
+    /**
+     * 支持bitmap
+     * 支持字体图片
+     * 支持本地图片
+     * 支持lottie动画
+     */
     public enum TabType {
-        BITMAP, ICON
+        BITMAP, FONT_ICON, ICON, LOTTIE
     }
 
     /**
@@ -38,6 +46,13 @@ public class TabBottomInfo<Color> {
      */
     public String defaultIconName;
     public String selectedIconName;
+
+    /**
+     * 本地图片
+     */
+    public int defaultIcon;
+    public int selectedIcon;
+
     public Color defaultColor;
     public Color tintColor;
     public TabType tabType;
@@ -47,6 +62,15 @@ public class TabBottomInfo<Color> {
         this.defaultBitmap = defaultBitmap;
         this.selectedBitmap = selectedBitmap;
         this.tabType = TabType.BITMAP;
+    }
+
+    public TabBottomInfo(String name, int defaultIcon, int selectedIcon, Color defaultColor, Color tintColor) {
+        this.name = name;
+        this.defaultIcon = defaultIcon;
+        this.selectedIcon = selectedIcon;
+        this.defaultColor = defaultColor;
+        this.tintColor = tintColor;
+        this.tabType = TabType.ICON;
     }
 
     public TabBottomInfo(String name, Bitmap defaultBitmap, Bitmap selectedBitmap, Color defaultColor, Color tintColor) {
@@ -65,6 +89,6 @@ public class TabBottomInfo<Color> {
         this.selectedIconName = selectedIconName;
         this.defaultColor = defaultColor;
         this.tintColor = tintColor;
-        this.tabType = TabType.ICON;
+        this.tabType = TabType.FONT_ICON;
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.prim.base_lib.log.LogConfig
 import com.prim.base_lib.log.LogManager
 import com.prim.base_lib.log.printer.ConsolePrinter
+import com.prim.summer_common.ui.component.SummerBaseApplication
 
 /**
  * @desc
@@ -14,7 +15,7 @@ import com.prim.base_lib.log.printer.ConsolePrinter
  * @name HonorKings
  * @version 1.0.0
  */
-class App : Application() {
+class App : SummerBaseApplication() {
     override fun onCreate() {
         super.onCreate()
         //初始化日志组件
