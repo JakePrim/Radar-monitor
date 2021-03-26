@@ -1,6 +1,9 @@
 package com.prim.honorkings;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +19,14 @@ public class MainActivity extends SummerBaseActivity implements MainActivityLogi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_bottom);
         activityLogic = new MainActivityLogic(this,savedInstanceState);
+        Handler handler = new Handler(Looper.myLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+
+
+                return false;
+            }
+        });
     }
 
     @Override

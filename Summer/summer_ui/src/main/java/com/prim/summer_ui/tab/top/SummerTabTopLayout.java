@@ -1,7 +1,9 @@
 package com.prim.summer_ui.tab.top;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -9,6 +11,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import com.prim.base_lib.utils.DisplayUtils;
 import com.prim.summer_ui.tab.bottom.SummerTabBottom;
 import com.prim.summer_ui.tab.bottom.TabBottomInfo;
 import com.prim.summer_ui.tab.common.ITabLayout;
@@ -105,12 +108,125 @@ public class SummerTabTopLayout extends HorizontalScrollView implements ITabLayo
         }
     }
 
+    /**
+     * 选择对应的tab
+     *
+     * @param nextInfo
+     */
     private void onSelected(@NonNull TabTopInfo<?> nextInfo) {
         for (OnTabSelectedListener<TabTopInfo<?>> listener : tabSelectedListeners) {
             listener.onTabSelectedChange(infoList.indexOf(nextInfo), selectedInfo, nextInfo);
         }
         this.selectedInfo = nextInfo;
+        autoScroll(nextInfo);
     }
+
+    int tabWith;
+
+    /**
+     * 滚动几个tab
+     */
+    private int range = 2;
+
+    /**
+     * 设置点击某个tab,是否需要展示左侧或者右侧要有几个tab
+     * @param range
+     */
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    private static final String TAG = "SummerTabTopLayout";
+
+    /**
+     * 自动滚动，实现点击的位置能够自动滚动以展示前后2个
+     *
+     * @param nextInfo
+     */
+    private void autoScroll(TabTopInfo<?> nextInfo) {
+        //获取点击tab的view
+        SummerTabTop tab = findTab(nextInfo);
+        if (tab == null) return;
+        //获取点击的tab的位置
+        int index = infoList.indexOf(nextInfo);
+        int[] loc = new int[2];
+        //获取点击的控件在屏幕的位置
+        tab.getLocationInWindow(loc);
+        int scrollWidth;
+        if (tabWith == 0) {
+            tabWith = tab.getWidth();
+        }
+        //判断点击了屏幕左侧还是右侧
+        if ((loc[0] + tabWith / 2) > DisplayUtils.getDisplayWidthInPx(getContext()) / 2) {
+            //在屏幕的右侧
+            scrollWidth = rangeScrollWidth(index, range);
+        } else {
+            //在屏幕的左侧
+            scrollWidth = rangeScrollWidth(index, -range);
+        }
+        Log.e(TAG, "autoScroll: " + scrollWidth);
+        //进行滚动
+        scrollTo(getScrollX() + scrollWidth, 0);
+    }
+
+    /**
+     * 获取可滚动的范围
+     *
+     * @param index 从第几个开始
+     * @param range 向前向后的范围
+     * @return 可滚动的范围
+     */
+    private int rangeScrollWidth(int index, int range) {
+        int scrollWidth = 0;
+        //遍历范围内
+        for (int i = 0; i <= Math.abs(range); i++) {
+            int next;
+            if (range < 0) {
+                next = range + i + index;
+            } else {
+                next = range - i + index;
+            }
+            if (next >= 0 && next < infoList.size()) {
+                if (range < 0) {
+                    scrollWidth -= scrollWidth(next, false);
+                } else {
+                    scrollWidth += scrollWidth(next, true);
+                }
+            }
+        }
+        return scrollWidth;
+    }
+
+    /**
+     * 指定位置的空间可滚动的距离
+     *
+     * @param index   指定位置的空间
+     * @param toRight 是否是点击了屏幕右侧
+     * @return 可滚动的距离
+     */
+    private int scrollWidth(int index, boolean toRight) {
+        SummerTabTop target = findTab(infoList.get(index));
+        if (target == null) return 0;
+        Rect rect = new Rect();
+        target.getLocalVisibleRect(rect);
+        if (toRight) {
+            //如果点击了屏幕的右侧
+            if (rect.right > tabWith) {//right坐标大于控件的宽度，说明完全没有显示
+                return tabWith;
+            } else {
+                //显示部分，减去已显示的宽度
+                return tabWith - rect.right;
+            }
+        } else {
+            if (rect.left <= -tabWith) {//left坐标小于等于-空间宽度，说明完全没有显示
+                return tabWith;
+            } else if (rect.left > 0) {//显示部分
+                return rect.left;
+            }
+            return 0;
+        }
+    }
+
 
     private LinearLayout getRootLayout(boolean clear) {
         LinearLayout rootView = (LinearLayout) getChildAt(0);

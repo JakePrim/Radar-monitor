@@ -7,4 +7,7 @@
 1. summer_lib: 底层支撑框架
 2. summer_common: 通用层框架，包括了BaseActivity的封装等逻辑
 3. summer_ui: 通用的UI框架，包括了各种UI组件
+   1. SummerTopTab 组件，顶部导航组件
+   2. SummerBottomTab 组件，底部导航组件
+   3. SummerRefersh 下拉刷新组件
 

@@ -47,11 +47,10 @@ public class SummerTabTop extends RelativeLayout implements ITab<TabTopInfo<?>> 
     }
 
     private void init() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.tab_top, this);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_tab_top_layout, this);
         tabTopImage = view.findViewById(R.id.tab_image);
         tabTopName = view.findViewById(R.id.tv_name);
         indicator = view.findViewById(R.id.tab_top_indicator);
-        PLog.e("Summer", "tabImage：" + tabTopImage);
     }
 
     //TODO 动态设置指示器的颜色
@@ -110,6 +109,7 @@ public class SummerTabTop extends RelativeLayout implements ITab<TabTopInfo<?>> 
 
     private void fontIconType(boolean selected, boolean init) {
         if (init) {
+            tabTopName.setVisibility(VISIBLE);
             tabTopImage.setVisibility(GONE);
             if (!TextUtils.isEmpty(tabInfo.name)) {
                 tabTopName.setText(tabInfo.name);
