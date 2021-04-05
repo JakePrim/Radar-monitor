@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".demo.banner.BannerActivity">
+
+    <com.prim.summer_ui.banner.core.SummerBanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@android:color/darker_gray"
+        app:autoPlay="false"
+        app:loop="true" />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="切换指示器" />
+
+    <Switch
+        android:id="@+id/auto_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="是否自动播放"
+        android:layout_marginLeft="20dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/dp_20" />
+</LinearLayout>

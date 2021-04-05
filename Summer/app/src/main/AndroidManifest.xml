@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prim.honorkings">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -10,10 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HonorKings">
-<!--        <activity android:name=".demo.tab.TabTopActivity"></activity>-->
+        <!--        <activity android:name=".demo.banner.BannerActivity"></activity>-->
+        <!-- <activity android:name=".demo.refresh.RefreshActivity"></activity> -->
+        <activity android:name=".demo.tab.TabTopActivity" />
         <activity android:name=".demo.tab.TabBottomActivity" />
         <activity android:name=".demo.log.LogActivity" />
-        <activity android:name=".demo.tab.TabTopActivity">
+        <activity android:name=".demo.banner.BannerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

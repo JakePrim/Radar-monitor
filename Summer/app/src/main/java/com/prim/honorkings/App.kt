@@ -18,27 +18,6 @@ import com.prim.summer_common.ui.component.SummerBaseApplication
 class App : SummerBaseApplication() {
     override fun onCreate() {
         super.onCreate()
-        //初始化日志组件
-        LogManager.init(object : LogConfig() {
-            override fun injectJsonParser(): JsonParse {
-                return JsonParse { src ->
-                    Gson().toJson(src)
-                }
-            }
 
-            override fun getGlobalTag(): String {
-                return "DemoTest"
-            }
-
-            override fun enable(): Boolean {
-                return true
-            }
-
-            override fun stackTraceDepth(): Int {
-                return 5
-            }
-
-
-        }, ConsolePrinter())
     }
 }

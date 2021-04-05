@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="HiBanner">
+    <declare-styleable name="SummerBanner">
         <attr name="autoPlay" format="boolean" />
         <attr name="loop" format="boolean" />
         <attr name="intervalTime" format="integer|reference" />
