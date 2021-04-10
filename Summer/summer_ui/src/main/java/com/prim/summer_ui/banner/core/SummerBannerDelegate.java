@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.prim.summer_ui.R;
 import com.prim.summer_ui.banner.indicator.BannerIndicator;
 import com.prim.summer_ui.banner.indicator.CircleIndicator;
+import com.prim.summer_ui.banner.indicator.KtCircleIndicator;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class SummerBannerDelegate implements IBanner, ViewPager.OnPageChangeList
             bannerAdapter = new BannerAdapter(mContext);
         }
         if (indicator == null) {
-            indicator = new CircleIndicator(mContext);
+            indicator = new KtCircleIndicator(mContext);
         }
         indicator.onInflate(bannerMos.size());
         bannerAdapter.setLayoutResId(layoutResId);

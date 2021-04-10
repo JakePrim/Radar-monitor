@@ -11,6 +11,7 @@ import com.prim.summer_ui.banner.core.BannerMo
 import com.prim.summer_ui.banner.core.SummerBanner
 import com.prim.summer_ui.banner.indicator.BannerIndicator
 import com.prim.summer_ui.banner.indicator.CircleIndicator
+import com.prim.summer_ui.banner.indicator.KtCircleIndicator
 import com.prim.summer_ui.banner.indicator.NumberIndicator
 
 class BannerActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class BannerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
-        initView(CircleIndicator(this), false)
+        initView(KtCircleIndicator(this), false)
         val change = findViewById<TextView>(R.id.change)
         val auto_play: Switch = findViewById<Switch>(R.id.auto_play)
         auto_play.setOnCheckedChangeListener { _, isChecked ->
@@ -43,7 +44,7 @@ class BannerActivity : AppCompatActivity() {
             if (indicator is CircleIndicator) {
                 initView(NumberIndicator(this), autoPlay)
             } else {
-                initView(CircleIndicator(this), autoPlay)
+                initView(KtCircleIndicator(this), autoPlay)
             }
         }
     }
@@ -53,7 +54,7 @@ class BannerActivity : AppCompatActivity() {
         val banner = findViewById<SummerBanner>(R.id.banner)
 
         var moList: MutableList<BannerMo> = ArrayList()
-        for (i in 0..7) {
+        for (i in urls.indices) {
             val mo = com.prim.honorkings.demo.banner.BannerMo()
             mo.url = urls[i % urls.size]
             moList.add(mo)
