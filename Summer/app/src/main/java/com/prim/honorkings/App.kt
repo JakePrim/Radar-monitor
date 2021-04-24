@@ -18,6 +18,5 @@ import com.prim.summer_common.ui.component.SummerBaseApplication
 class App : SummerBaseApplication() {
     override fun onCreate() {
         super.onCreate()
-
     }
 }

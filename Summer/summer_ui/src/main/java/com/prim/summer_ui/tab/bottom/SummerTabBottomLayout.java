@@ -141,6 +141,7 @@ public class SummerTabBottomLayout extends FrameLayout implements ITabLayout<Sum
             tabSelectedListeners.add(tabBottom);
             //设置tab data
             tabBottom.setTabInfo(info);
+            //添加tab view
             flTab.addView(tabBottom, params);
             tabBottom.setOnClickListener(new OnClickListener() {
                 @Override
@@ -151,6 +152,7 @@ public class SummerTabBottomLayout extends FrameLayout implements ITabLayout<Sum
         }
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.BOTTOM;
+        //添加底部line横线
         addBottomLine();
         addView(flTab, params);
         fixContentView();

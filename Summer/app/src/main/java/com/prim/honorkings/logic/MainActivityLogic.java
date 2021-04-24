@@ -142,7 +142,7 @@ public class MainActivityLogic {
             }
         });
 
-        //fix-恢复之前保留的状态
+        //fix-恢复之前保留的状态 会由onTabSelectedChange监听到
         tabBottomLayout.defaultSelected(tabInfoList.get(currentItemIndex));
     }
 

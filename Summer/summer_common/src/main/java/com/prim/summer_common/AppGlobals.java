@@ -1,3 +1,5 @@
+package com.prim.summer_common;
+
 /**
  * @author prim
  * @version 1.0.0

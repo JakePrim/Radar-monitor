@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.prim.base_lib.log.LogConfig
 import com.prim.base_lib.log.LogManager
 import com.prim.base_lib.log.printer.ConsolePrinter
-import com.prim.summer_common.flutter.SummerFlutterCacheManager
+import com.prim.summer_common.manager.ActivityManager
 
 /**
  * @author prim
@@ -18,8 +18,10 @@ import com.prim.summer_common.flutter.SummerFlutterCacheManager
 open class SummerBaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        //初始化log日志
+        //初始化log日志插件
         initLog()
+        //初始化Activity管理栈
+        ActivityManager.instance.init(this)
         //预加载flutter引擎模块
 //        SummerFlutterCacheManager.instance?.preLoad(this)
     }
@@ -44,8 +46,6 @@ open class SummerBaseApplication : Application() {
             override fun stackTraceDepth(): Int {
                 return 5
             }
-
-
         }, ConsolePrinter())
     }
 }

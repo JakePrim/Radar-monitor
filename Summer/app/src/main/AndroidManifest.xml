@@ -17,7 +17,7 @@
         <activity android:name=".demo.tab.TabTopActivity" />
         <activity android:name=".demo.tab.TabBottomActivity" />
         <activity android:name=".demo.log.LogActivity" />
-        <activity android:name=".demo.banner.BannerActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

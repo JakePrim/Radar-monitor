@@ -28,7 +28,7 @@ abstract class FlutterFragment : SummerBaseFragment(){
 //
 //    init {
 //        flutterEngine = null
-////        flutterEngine = SummerFlutterCacheManager.instance!!.getCachedFlutterEngine(moduleName!!,AppGlobals.get())
+////        flutterEngine = SummerFlutterCacheManager.instance!!.getCachedFlutterEngine(moduleName!!,com.prim.summer_common.AppGlobals.get())
 //    }
 //
 //    override fun getLayoutId(): Int {
