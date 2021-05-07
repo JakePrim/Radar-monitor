@@ -3,10 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="HomePage" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人中心" />
+
+        <Button
+            android:id="@+id/btn_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员权益" />
+
+        <Button
+            android:id="@+id/btn_authentication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账户充值" />
+
+        <Button
+            android:id="@+id/btn_degrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全局降级策略" />
+
+    </LinearLayout>
 
 </RelativeLayout>

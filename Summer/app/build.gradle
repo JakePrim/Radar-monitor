@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.alibaba.arouter' //arouter路由必须配置
 }
 
 android {
@@ -16,6 +18,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    //ARouter路由必须配置
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
     }
 
     buildTypes {
@@ -34,22 +43,18 @@ android {
 }
 
 dependencies {
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation project(path: ':summer_lib')
-    implementation project(path: ':summer_ui')
+    //通用的基础层框架
     implementation project(path: ':summer_common')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'androidx.fragment:fragment-ktx:1.2.4'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    //ARouter路由必须配置
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+
     //flutter依赖
 //    implementation project(':flutter')
 }

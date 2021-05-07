@@ -1,7 +1,5 @@
 package com.prim.base_lib.log;
 
-import android.util.Log;
-
 import com.prim.base_lib.log.printer.LogPrinter;
 import com.prim.base_lib.log.utils.StackTraceUtil;
 
@@ -16,11 +14,11 @@ import java.util.List;
  * @contact https://jakeprim.cn
  * @name HonorKings
  */
-public class PLog {
+public class SummerLog {
     private static final String P_LOG_PACkAGE;
 
     static {
-        String className = PLog.class.getName();
+        String className = SummerLog.class.getName();
         P_LOG_PACkAGE = className.substring(0, className.lastIndexOf('.') + 1);
     }
 

@@ -148,7 +148,7 @@ class FilePrinter : Printer() {
  * 定义接口类
  */
 interface Study {
-    val time: Int //接口定义的抽象的属性
+    val time: Int//接口定义的抽象的属性
 
     fun discuss()
 

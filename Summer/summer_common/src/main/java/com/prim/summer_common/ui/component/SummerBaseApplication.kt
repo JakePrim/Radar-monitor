@@ -1,10 +1,13 @@
 package com.prim.summer_common.ui.component
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
 import com.prim.base_lib.log.LogConfig
 import com.prim.base_lib.log.LogManager
+import com.prim.base_lib.log.SummerLog
 import com.prim.base_lib.log.printer.ConsolePrinter
+import com.prim.summer_common.BuildConfig
 import com.prim.summer_common.manager.ActivityManager
 
 /**
@@ -22,6 +25,12 @@ open class SummerBaseApplication : Application() {
         initLog()
         //初始化Activity管理栈
         ActivityManager.instance.init(this)
+        //初始化路由相关信息
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
         //预加载flutter引擎模块
 //        SummerFlutterCacheManager.instance?.preLoad(this)
     }
@@ -36,10 +45,14 @@ open class SummerBaseApplication : Application() {
             }
 
             override fun getGlobalTag(): String {
-                return "DemoTest"
+                return "SummerLog"
             }
 
             override fun enable(): Boolean {
+                return BuildConfig.DEBUG
+            }
+
+            override fun includeThread(): Boolean {
                 return true
             }
 

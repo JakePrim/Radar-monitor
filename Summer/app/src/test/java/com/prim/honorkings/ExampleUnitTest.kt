@@ -1,5 +1,6 @@
 package com.prim.honorkings
 
+import com.prim.honorkings.demo.kotlin.SemaphoreDemo
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +13,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        SemaphoreDemo.main(null)
     }
 }

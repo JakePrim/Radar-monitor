@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import com.prim.base_lib.log.PLog;
 import com.prim.summer_ui.R;
 import com.prim.summer_ui.tab.common.ITab;
 
