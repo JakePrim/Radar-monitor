@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "My Application"
+rootProject.name = "FBEDataItem"
 include ':app'
 include ':lib-dataitem'
 include ':apt:apt_item_annotation'
