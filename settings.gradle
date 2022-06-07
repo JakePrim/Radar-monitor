@@ -14,6 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FBEDataItem"
 include ':app'
-include ':lib-dataitem'
+include ':fbe-dataitem'
 include ':apt:apt_item_annotation'
 include ':apt:apt_item_processor'
