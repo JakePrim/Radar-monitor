@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':apt:apt_item_annotation')
+    implementation 'com.squareup:javapoet:1.12.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.30"
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
