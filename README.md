@@ -1,1 +1,3 @@
-> Reactic-Mobile: Reactic-Mobile 旨在 高效率、高质量React开发移动端Web通用的解决方案及开发模版
+> Flutteric:旨在高效率、高质量开发跨平台通用的解决方案基础开发脚手架
+
+
