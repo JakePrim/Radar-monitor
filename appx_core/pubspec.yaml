@@ -1,0 +1,19 @@
+name: appx_core
+description: battle-tested Flutter project boilerplate, along with a CLI, component/model generators, and more!
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
