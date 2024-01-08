@@ -1,1 +1,1 @@
-> FaoNative:旨在高效率、高质量开发跨平台通用的解决方案基础开发脚手架,实现三端同构
+> appX: A simple and easy to use Android APM framework (tools)
