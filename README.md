@@ -1,1 +1,1 @@
-> appX: A simple and easy to use Android APM framework (tools)
+> appX:  battle-tested React Native project boilerplate, along with a CLI, component/model generators, and more!
